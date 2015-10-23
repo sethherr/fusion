@@ -28,6 +28,7 @@ export class LayoutMaker {
     $template.attr('class', 'layer layer-'+l);
     $template.attr('data-layer', l);
     $('body').append($template);
+    $template.prepend('<input name="layer-description" placeholder="layer description"><br/>');
 
     // Setup handlers of all the keys
     for(var i=0; i <= 80; i++) {
@@ -171,7 +172,8 @@ export class LayoutMaker {
     // Each layout has 84 keys (14 rows 6 columns)
     var jsn = {
       "keyboard_layout": {
-        "description": "dvorak",
+        "type": this.keyboardType,
+        "description": $('input[name=layout-description]').val(),
         "layers": []
       }
     };
@@ -181,7 +183,7 @@ export class LayoutMaker {
       for(var k=0; k< this.layout[i].length; k++) {
         keymap[k] = this.layout[i][k] || "KC_TRANSPARENT";
       }
-      jsn['keyboard_layout']['layers'].push({"description": "", "keymap": keymap});
+      jsn['keyboard_layout']['layers'].push({"description": $('.layer.layer-'+i+' input[name=layer-description]').val(), "keymap": keymap});
 
     }
     console.log(JSON.stringify(jsn, null, "  "));
