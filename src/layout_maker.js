@@ -60,11 +60,13 @@ export class LayoutMaker {
 
     for (var cat in keyCategories) {
       if (keyCategories.hasOwnProperty(cat)) {
+        // Category main menu
         var catMenu = {name: keyCategories[cat], items: {} };
         for (var keyCode in keyCodes) {
           if (keyCodes.hasOwnProperty(keyCode)) {
             if (keyCodes[keyCode][2] == cat) {
-              catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {name: keyCodes[keyCode][1], callback: this.contextMenuKey.bind(this)};
+              // Category - key option
+              catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {name: keyCodes[keyCode][0]+' ('+keyCodes[keyCode][1]+')', callback: this.contextMenuKey.bind(this)};
             }
           }
         }
@@ -72,6 +74,7 @@ export class LayoutMaker {
       }
     }
 
+    // Start context menu on all keys
     $.contextMenu({
       selector: ".key",
       items: items
