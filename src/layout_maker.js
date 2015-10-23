@@ -1,4 +1,5 @@
 import {keyCodes} from 'keycodes';
+import {keyCategories} from 'keycodes';
 
 /**
  * LayoutMaker
@@ -52,11 +53,28 @@ export class LayoutMaker {
     d3.select('#save').on('click', this.save.bind(this));
     d3.select('#add-layer').on('click', this.addLayer.bind(this));
 
+    var items = {
+      clear: {name: "Clear", callback: this.contextMenuKey.bind(this) },
+      separator1: "-----"
+    };
+
+    for (var cat in keyCategories) {
+      if (keyCategories.hasOwnProperty(cat)) {
+        var catMenu = {name: keyCategories[cat], items: {} };
+        for (var keyCode in keyCodes) {
+          if (keyCodes.hasOwnProperty(keyCode)) {
+            if (keyCodes[keyCode][2] == cat) {
+              catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {name: keyCodes[keyCode][1], callback: this.contextMenuKey.bind(this)};
+            }
+          }
+        }
+        items['cat'+cat] = catMenu;
+      }
+    }
+
     $.contextMenu({
       selector: ".key",
-      items: {
-        clear: {name: "Clear", callback: this.contextMenuKey.bind(this) }
-      }
+      items: items
     });
   }
 
@@ -118,7 +136,12 @@ export class LayoutMaker {
     var key = $this.data('key');
     var layer = $this.closest('svg').data('layer');
 
-    this.setKey(layer, key, '', '');
+    var what = optionKey.split('|');
+    if(what[0] == 'clear') {
+      this.setKey(layer, key, '', '');
+    } else if(what[0] == 'set') {
+      this.setKey(layer, key, what[1], what[2]);
+    }
   }
 
   /**
