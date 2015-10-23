@@ -159,9 +159,9 @@ export class LayoutMaker {
       }
 
       this.setKey(this.selectedLayer, this.selectedKey, keyCodes[d3.event.keyCode][1], keyCodes[d3.event.keyCode][0]);
+      d3.event.preventDefault();
+      return false;
     }
-    d3.event.preventDefault();
-    return false;
   }
 
   /**
