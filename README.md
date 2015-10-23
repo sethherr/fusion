@@ -1,7 +1,7 @@
 ![ergodox](ergodox.png)
 
-# ErgoDox Layout Maker
-Web based open source ErgoDox Layout Maker.
+# Keyboard Layout Maker
+Web based open source Keyboard Layout Maker.
 
 ## Dependencies
 
@@ -15,7 +15,6 @@ Web based open source ErgoDox Layout Maker.
     npm install
     npm start
 
-
 ## References
 
 - [How to create a keymap](https://github.com/benblazak/ergodox-firmware#create-a-new-keymap)
@@ -25,7 +24,7 @@ Web based open source ErgoDox Layout Maker.
 - [JS keycodes](http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes)
 - [Decode Unicode](http://www.decodeunicode.org/en/)
 
-### Compiling firmware (on OSX)
+### Compiling firmware (on OSX) - outdated - needs work
 
 Prerequisites (see https://github.com/osx-cross/homebrew-avr/):
 
