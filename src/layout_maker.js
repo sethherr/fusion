@@ -104,19 +104,16 @@ export class LayoutMaker {
       d3.select(d3.event.target).classed({selected: true});
       this.selectedKey = key;
       this.selectedLayer = layer;
-      console.log("selectKey", key, layer);
     } else {
       this.selectedKey = null;
       this.selectedLayer = null;
-      console.log("selectKey", 'none', 'none');
     }
   }
 
   /**
    * the user uses the context menu with a key (using mouse)
    */
-  contextMenuKey(key, option) {
-    console.log("contextMenuKey", key, option);
+  contextMenuKey(optionKey, option) {
     var $this = $(option.$trigger);
     var key = $this.data('key');
     var layer = $this.closest('svg').data('layer');
@@ -128,7 +125,6 @@ export class LayoutMaker {
    * user pressed a key
    */
   pressedKey() {
-    console.log("pressedKey");
     if(this.selectedKey != null && this.selectedLayer != null) {
       if (!keyCodes[d3.event.keyCode]) {
         console.log("Key not recognised, please report.");
