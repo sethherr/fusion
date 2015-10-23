@@ -51,6 +51,13 @@ export class LayoutMaker {
     d3.select('body').on('keyup', this.pressedKey.bind(this));
     d3.select('#save').on('click', this.save.bind(this));
     d3.select('#add-layer').on('click', this.addLayer.bind(this));
+
+    $.contextMenu({
+      selector: ".key",
+      items: {
+        clear: {name: "Clear", callback: this.contextMenuKey.bind(this) }
+      }
+    });
   }
 
   /**
@@ -59,8 +66,23 @@ export class LayoutMaker {
    * @param key {Number} key position of the key (within the layer)
    * @param keyCode {Number} keycode
    */
-  setKey(layer, key, keyCode) {
-    this.layout[this.selectedLayer][this.selectedKey-1] = keyCode;
+  setKey(layer, key, keyCode, label) {
+    this.layout[layer][key-1] = keyCode;
+
+    var $key = d3.select('.layer.layer-'+layer+' .key.key-'+key);
+    var $text = d3.select('.layer.layer-'+layer+' .label.label-'+key);
+    var $wrapper = $key.node().parentNode;
+
+    if ($text.empty()) {
+      $text = d3.select($wrapper).append('text')
+        .attr('class', 'label label-'+this.selectedKey)
+        .attr('x', +$key.attr('x') + $key.attr('width')/2)
+        .attr('y', +$key.attr('y'));
+
+      $text.append('tspan').attr('dx', 0).attr('dy', 30).html(label);
+    } else {
+      $text.select('text tspan').html(label);
+    }
   }
 
   /*
@@ -82,37 +104,39 @@ export class LayoutMaker {
       d3.select(d3.event.target).classed({selected: true});
       this.selectedKey = key;
       this.selectedLayer = layer;
+      console.log("selectKey", key, layer);
     } else {
       this.selectedKey = null;
       this.selectedLayer = null;
+      console.log("selectKey", 'none', 'none');
     }
+  }
+
+  /**
+   * the user uses the context menu with a key (using mouse)
+   */
+  contextMenuKey(key, option) {
+    console.log("contextMenuKey", key, option);
+    var $this = $(option.$trigger);
+    var key = $this.data('key');
+    var layer = $this.closest('svg').data('layer');
+
+    this.setKey(layer, key, '', '');
   }
 
   /**
    * user pressed a key
    */
   pressedKey() {
+    console.log("pressedKey");
     if(this.selectedKey != null && this.selectedLayer != null) {
-      var $key = d3.select('.layer.layer-'+this.selectedLayer+' .key.key-'+this.selectedKey);
-      var $text = d3.select('.layer.layer-'+this.selectedLayer+' .label.label-'+this.selectedKey);
-      var $wrapper = $key.node().parentNode;
       if (!keyCodes[d3.event.keyCode]) {
         console.log("Key not recognised, please report.");
         console.log(d3.event);
         return;
       }
 
-      if ($text.empty()) {
-        $text = d3.select($wrapper).append('text')
-          .attr('class', 'label label-'+this.selectedKey)
-          .attr('x', +$key.attr('x') + $key.attr('width')/2)
-          .attr('y', +$key.attr('y'));
-
-        $text.append('tspan').attr('dx', 0).attr('dy', 30).html(keyCodes[d3.event.keyCode][0]);
-      } else {
-        $text.select('text tspan').html(keyCodes[d3.event.keyCode][0]);
-      }
-      this.setKey(this.selectedLayer, this.selectedKey, keyCodes[d3.event.keyCode][1]);
+      this.setKey(this.selectedLayer, this.selectedKey, keyCodes[d3.event.keyCode][1], keyCodes[d3.event.keyCode][0]);
     }
     d3.event.preventDefault();
     return false;
