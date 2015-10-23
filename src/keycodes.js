@@ -2,6 +2,13 @@
  format is as follows:
  *
  * js-keycode: [display, c-define]
+ *
+ * Useful documentation:
+ *
+ * Unicode: Keyboard Symbols: http://xahlee.info/comp/unicode_computing_symbols.html
+ * JS keycodes: http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
+ * Decode Unicode: http://www.decodeunicode.org/en/
+ * List of Unicode characters: https://en.wikipedia.org/wiki/List_of_Unicode_characters
  */
 export const keyCodes = {
   500: ["", "KC_NO", "other"],
@@ -48,19 +55,19 @@ export const keyCodes = {
   27: ["&#x238b;", "KC_ESCAPE", "spacing"],
   8: ["&#x232b;", "KC_BSPACE", "spacing"],
   9: ["&#x21e5;", "KC_TAB", "spacing"],
-  32: ["SPC", "KC_SPACE", "spacing"],
+  32: ["&#x23b5;", "KC_SPACE", "spacing"],
   189: ["-", "KC_MINUS", "other"],
   187: ["=", "KC_EQUAL", "other"],
-  219: ["[", "KC_LBRACKET", "other"],
-  221: ["]", "KC_RBRACKET", "other"],
-  220: ["\\", "KC_BSLASH", "other"],     /* \ (and |) */
-  504: ["", "KC_NONUS_HASH", "other"],     /* Non-US # and ~ */
-  186: [";", "KC_SCOLON", "other"],      /* ; (and :) */
-  222: ["\'", "KC_QUOTE", "other"],      /* ' and " */
+  219: ["[", "KC_LBRACKET", "punct"],
+  221: ["]", "KC_RBRACKET", "punct"],
+  220: ["\\", "KC_BSLASH", "punct"],     /* \ (and |) */
+  504: ["", "KC_NONUS_HASH", "punct"],     /* Non-US # and ~ */
+  186: [";", "KC_SCOLON", "punct"],      /* ; (and :) */
+  222: ["\'", "KC_QUOTE", "punct"],      /* ' and " */
   192: ["`", "KC_GRAVE", "other"],       /* Grave accent and tilde */
-  188: [",", "KC_COMMA", "other"],       /* , and < */
-  190: [".", "KC_DOT", "other"],         /* . and > */
-  191: ["/", "KC_SLASH", "other"],       /* / and ? */
+  188: [",", "KC_COMMA", "punct"],       /* , and < */
+  190: [".", "KC_DOT", "punct"],         /* . and > */
+  191: ["/", "KC_SLASH", "punct"],       /* / and ? */
   505: ["", "KC_CAPSLOCK", "other"],
   112: ["F1", "KC_F1", "f1"],
   113: ["F2", "KC_F2", "f1"],
@@ -131,7 +138,7 @@ export const keyCodes = {
   554: ["", "KC_COPY", "other"],
   555: ["", "KC_PASTE", "other"],
   556: ["", "KC_FIND", "other"],
-  557: ["", "KC__MUTE", "other"],
+  557: ["&#x1f507;", "KC__MUTE", "other"],
   558: ["&#x1f50a;", "KC__VOLUP", "other"],
   559: ["&#x1f509;", "KC__VOLDOWN", "other"],
   20: ["&#x21ea;", "KC_LOCKING_CAPS", "other"],   /* locking Caps Lock */
@@ -183,7 +190,7 @@ export const keyCodes = {
   751: ["", "KC_SYSTEM_SLEEP", "system"],
   752: ["", "KC_SYSTEM_WAKE", "system"],
   /* Media Control */
-  800: ["", "KC_AUDIO_MUTE", "media"],
+  800: ["&#x1f507;", "KC_AUDIO_MUTE", "media"],
   801: ["&#x1f50a;", "KC_AUDIO_VOL_UP", "media"],
   802: ["&#x1f509;", "KC_AUDIO_VOL_DOWN", "media"],
   803: ["", "KC_MEDIA_NEXT_TRACK", "media"],
@@ -259,18 +266,19 @@ export const keyCodes = {
 };
 
 export const keyCategories = {
-  "az": "A-Z",
-  "09": "0-9",
+  "az": "Alphabet",
+  "09": "Numeric",
   "f1": "Function keys",
   "num": "Numpad",
-  "nav": "Navigational keys",
+  "punct": "Punctuation",
+  "nav": "Navigational",
   "spacing": "Spacing",
   "mods": "Modifiers",
   "system": "System control",
-  "media": "Media control",
-  "fn": "Fn key",
-  "mouse": "Mousekey",
-  "mousewheel": "Mousekey wheel",
-  "mouseaccel": "Mousekey accel",
+  "media": "Media",
+  "fn": "Fn",
+  "mouse": "Mouse",
+  "mousewheel": "Mouse wheel",
+  "mouseaccel": "Mouse acceleration",
   "other": "Other"
 };

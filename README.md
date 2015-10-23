@@ -1,7 +1,11 @@
 ![ergodox](ergodox.png)
 
 # Keyboard Layout Maker
-Web based open source Keyboard Layout Maker.
+Web-based, open source Keyboard Layout Maker for multiple keyboard types.
+Currently Ergodox EZ, and ortholinear's Planck and Preonic are supported.
+
+This project will output JSON file for the full layout (including layers),
+another tool is needed to convert these JSON files into firmware compatible .c or .h files. 
 
 ## Dependencies
 
@@ -15,28 +19,12 @@ Web based open source Keyboard Layout Maker.
     npm install
     npm start
 
-## References
-
-- [How to create a keymap](https://github.com/benblazak/ergodox-firmware#create-a-new-keymap)
-- [ErgoDox Keyboard Firmware](https://github.com/benblazak/ergodox-firmware)
-- [TMK](https://github.com/tenderlove/tmk_keyboard/tree/master/keyboard/ergodox)
-- [Unicode: Keyboard Symbols](http://xahlee.info/comp/unicode_computing_symbols.html)
-- [JS keycodes](http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes)
-- [Decode Unicode](http://www.decodeunicode.org/en/)
-
-### Compiling firmware (on OSX) - outdated - needs work
-
-Prerequisites (see https://github.com/osx-cross/homebrew-avr/):
-
-    brew tap osx-cross/avr
-    brew install avr-libc
-
-After this it is a simple `make` inside the `src` folder of the [firmware](https://github.com/benblazak/ergodox-firmware).
-
-To compile a different layout: `make LAYOUT=layout`, so say `make LAYOUT=dvorak-kinesis-mod`
-
 ## Ideas
 
 - Make standalone using http://electron.atom.io/
 - Integrate directly with Teensy loader (http://www.pjrc.com/teensy/loader_cli.html)
 - Check whether we're on Mac, Linux or Windows to detect which the best representation of the key is.
+
+## License
+
+MIT, see LICENSE
