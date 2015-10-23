@@ -4,7 +4,12 @@ import {keyCodes} from 'keycodes';
  * LayoutMaker
  */
 export class LayoutMaker {
-  constructor() {
+  /**
+   * Creates a new LayoutMaker
+   * @param keyboardType {String} type of keyboard
+   */
+  constructor(keyboardType) {
+    this.keyboardType = keyboardType;
     this.selectedKey = null;
     this.selectedLayer = null;
     this.layout = [];
@@ -18,7 +23,7 @@ export class LayoutMaker {
   addLayer() {
     var l = this.nrOfLayers;
     this.layout[l] = [];
-    var $template = $('.layer-template').clone(false);
+    var $template = $('.layer-template.'+this.keyboardType).clone(false);
     $template.attr('class', 'layer layer-'+l);
     $template.attr('data-layer', l);
     $('body').append($template);
