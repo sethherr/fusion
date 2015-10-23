@@ -93,7 +93,7 @@ export class LayoutMaker {
 
     if ($text.empty()) {
       $text = d3.select($wrapper).append('text')
-        .attr('class', 'label label-'+this.selectedKey)
+        .attr('class', 'label label-'+key)
         .attr('x', +$key.attr('x') + $key.attr('width')/2)
         .attr('y', +$key.attr('y'));
 
