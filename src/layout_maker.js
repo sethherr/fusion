@@ -7,11 +7,11 @@ import {keyCategories} from 'keycodes';
 export class LayoutMaker {
   /**
    * Creates a new LayoutMaker
-   * @param keyboardType {String} type of keyboard
    * @param container {String} selector to the container
+   * @param keyboardType {String} type of keyboard
    */
-  constructor(keyboardType, container) {
-    this.keyboardType = keyboardType;
+  constructor(container, keyboardType) {
+    this.keyboardType = keyboardType||'ergodox';
     this.container = container;
     this.selectedKey = null;
     this.selectedLayer = null;

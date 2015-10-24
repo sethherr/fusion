@@ -33,8 +33,7 @@
     }
 
     System.import('layout_maker').then(function (layout_maker) {
-      // Switch keyboard types by replacing ergodox with planck or preonic
-      var lm = new layout_maker.LayoutMaker(getParameterByName('keyboardType')||'ergodox', "#keyboard-layers");
+      var lm = new layout_maker.LayoutMaker("#keyboard-layers", getParameterByName('keyboardType'));
       lm.start();
     });
   </script>
