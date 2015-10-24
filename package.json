@@ -1,7 +1,7 @@
 {
-  "name": "ergodox-layout-maker",
+  "name": "keyboard-layout-maker",
   "version": "1.0.0",
-  "description": "Ergodox Layout Maker",
+  "description": "Keyboard Layout Maker",
   "dependencies": {
     "bootstrap": "^3.3.5",
     "d3": "^3.5.6",
@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tdegrunt/ergodox-layout-maker.git"
+    "url": "git+https://github.com/ErgoDox-EZ/keyboard-layout-maker.git"
   },
   "author": "Tom de Grunt <tom@degrunt.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tdegrunt/ergodox-layout-maker/issues"
+    "url": "https://github.com/ErgoDox-EZ/keyboard-layout-maker/issues"
   },
-  "homepage": "https://github.com/tdegrunt/ergodox-layout-maker#readme"
+  "homepage": "https://github.com/ErgoDox-EZ/keyboard-layout-maker#readme"
 }
