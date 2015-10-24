@@ -10,17 +10,17 @@ text.label {
 	font-family: Helvetica;
 	font-size: 18px;
 	font-weight: bold;
-	fill: #000000;
+	fill: #666;
 }
 
 rect.key {
-  fill: #D8D8D8;
+  fill: #eee;
 }
 
 rect.highlight {
-  fill: #e8e8e8;
+  fill: #e0e0e0;
 }
 
 rect.selected {
-  fill: #a8a8a8;
+  fill: #aaa;
 }

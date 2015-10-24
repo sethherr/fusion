@@ -189,5 +189,6 @@ export class LayoutMaker {
 
     }
     console.log(JSON.stringify(jsn, null, "  "));
+    alert("Check browser console for JSON output");
   }
 }
