@@ -1,4 +1,4 @@
-![ergodox](ergodox.png)
+![ergodox](resources/ergodox.png)
 
 # Keyboard Layout Maker
 Web-based, open source Keyboard Layout Maker for multiple keyboard types.

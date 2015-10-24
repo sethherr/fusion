@@ -4,6 +4,8 @@
   "description": "Ergodox Layout Maker",
   "dependencies": {
     "bootstrap": "^3.3.5",
+    "d3": "^3.5.6",
+    "jquery-contextmenu": "^1.9.1",
     "systemjs": "^0.18.4"
   },
   "devDependencies": {
