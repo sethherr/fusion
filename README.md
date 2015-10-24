@@ -7,12 +7,6 @@ Currently Ergodox EZ, and ortholinear's Planck and Preonic are supported.
 This project will output JSON file for the full layout (including layers),
 another tool is needed to convert these JSON files into firmware compatible .c or .h files. 
 
-## Dependencies
-
-- d3 for SVG stuff
-- jQuery for everything else.
-- nodejs / npm
-
 ## Quick Start
 
     npm install gulp -g
