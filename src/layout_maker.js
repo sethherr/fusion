@@ -30,7 +30,7 @@ export class LayoutMaker {
     $template.attr('class', 'layer layer-'+l);
     $template.attr('data-layer', l);
     $(this.container).append($template);
-    $template.prepend('<input name="layer-description" placeholder="layer description"><br/>');
+    $template.prepend('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control"><br/>');
 
     // Setup handlers of all the keys
     for(var i=0; i <= 80; i++) {
