@@ -8,9 +8,11 @@ export class LayoutMaker {
   /**
    * Creates a new LayoutMaker
    * @param keyboardType {String} type of keyboard
+   * @param container {String} selector to the container
    */
-  constructor(keyboardType) {
+  constructor(keyboardType, container) {
     this.keyboardType = keyboardType;
+    this.container = container;
     this.selectedKey = null;
     this.selectedLayer = null;
     this.layout = [];
@@ -27,7 +29,7 @@ export class LayoutMaker {
     var $template = $('.layer-template.'+this.keyboardType).clone(false);
     $template.attr('class', 'layer layer-'+l);
     $template.attr('data-layer', l);
-    $('body').append($template);
+    $(this.container).append($template);
     $template.prepend('<input name="layer-description" placeholder="layer description"><br/>');
 
     // Setup handlers of all the keys
@@ -117,7 +119,7 @@ export class LayoutMaker {
   selectKey() {
     var $this = $(d3.event.target);
     var key = $this.data('key');
-    var layer = $this.closest('svg').data('layer');
+    var layer = $this.closest('.layer').data('layer');
 
     if (this.selectedLayer != null && this.selectedKey != null) {
       d3.select('.layer.layer-'+this.selectedLayer+' .key.key-'+this.selectedKey).classed({selected: false});
@@ -138,7 +140,7 @@ export class LayoutMaker {
   contextMenuKey(optionKey, option) {
     var $this = $(option.$trigger);
     var key = $this.data('key');
-    var layer = $this.closest('svg').data('layer');
+    var layer = $this.closest('.layer').data('layer');
 
     var what = optionKey.split('|');
     if(what[0] == 'clear') {
