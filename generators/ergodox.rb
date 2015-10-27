@@ -78,28 +78,19 @@ require 'json'
 
 layout = JSON.load(File.open(ARGV[0]))
 puts header
+
+cols = [7,7,6,7,5,2,1,3,7,7,6,7,5,2,1,3]
+
 layout['keyboard_layout']['layers'].each do |layer|
 
   puts "// #{layer['description']}"
   puts "KEYMAP("
 
-  puts "       #{layer['keymap'][0..6].join(', ')},"
-  puts "       #{layer['keymap'][7..13].join(', ')},"
-  puts "       #{layer['keymap'][14..19].join(', ')},"
-  puts "       #{layer['keymap'][20..26].join(', ')},"
-  puts "       #{layer['keymap'][27..31].join(', ')},"
-  puts "       #{layer['keymap'][32..33].join(', ')},"
-  puts "       #{layer['keymap'][34..34].join(', ')},"
-  puts "       #{layer['keymap'][35..37].join(', ')},"
-  puts "// RIGHT"
-  puts "       #{layer['keymap'][38..44].join(', ')},"
-  puts "       #{layer['keymap'][45..51].join(', ')},"
-  puts "       #{layer['keymap'][52..57].join(', ')},"
-  puts "       #{layer['keymap'][58..64].join(', ')},"
-  puts "       #{layer['keymap'][65..69].join(', ')},"
-  puts "       #{layer['keymap'][70..71].join(', ')},"
-  puts "       #{layer['keymap'][72..72].join(', ')},"
-  puts "       #{layer['keymap'][73..75].join(', ')},"
+  cols.inject(0) do |start, c|
+    puts "       %s," % layer['keymap'][start..start+c-1].join(",\t")
+    start += c
+  end
+
   puts "),"
 
 end
