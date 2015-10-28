@@ -262,10 +262,37 @@ export const keyCodes = {
   /* Mousekey accel */
   914: ["", "KC_MS_ACCEL0", "mouseaccel"],
   915: ["", "KC_MS_ACCEL1", "mouseaccel"],
-  916: ["", "KC_MS_ACCEL2", "mouseaccel"]
+  916: ["", "KC_MS_ACCEL2", "mouseaccel"],
+  /* Momentary switches */
+  1000: ["MO0", "MO(0)", "momentary"],
+  1001: ["MO1", "MO(1)", "momentary"],
+  1002: ["MO2", "MO(2)", "momentary"],
+  1003: ["MO3", "MO(3)", "momentary"],
+  1004: ["MO4", "MO(4)", "momentary"],
+  1005: ["MO5", "MO(5)", "momentary"],
+  1006: ["MO6", "MO(6)", "momentary"],
+  1007: ["MO7", "MO(7)", "momentary"],
+  1008: ["MO8", "MO(8)", "momentary"],
+  1009: ["MO9", "MO(9)", "momentary"],
+  1010: ["MO10", "MO(10)", "momentary"],
+  /* Layer switch */
+  1050: ["DF0", "DF(0)", "layer"],
+  1051: ["DF1", "DF(1)", "layer"],
+  1052: ["DF2", "DF(2)", "layer"],
+  1053: ["DF3", "DF(3)", "layer"],
+  1054: ["DF4", "DF(4)", "layer"],
+  1055: ["DF5", "DF(5)", "layer"],
+  1056: ["DF6", "DF(6)", "layer"],
+  1057: ["DF7", "DF(7)", "layer"],
+  1058: ["DF8", "DF(8)", "layer"],
+  1059: ["DF9", "DF(9)", "layer"],
+  1060: ["DF10", "DF(10)", "layer"],
 };
 
 export const keyCategories = {
+  "momentary": "Mometary layer switch",
+  "layer": "Layer switch",
+  "sep1": "-----",
   "az": "Alphabet",
   "09": "Numeric",
   "f1": "Function keys",
@@ -280,5 +307,5 @@ export const keyCategories = {
   "mouse": "Mouse",
   "mousewheel": "Mouse wheel",
   "mouseaccel": "Mouse acceleration",
-  "other": "Other"
+  "other": "Other",
 };

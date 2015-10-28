@@ -63,13 +63,21 @@ export class LayoutMaker {
 
     for (var cat in keyCategories) {
       if (keyCategories.hasOwnProperty(cat)) {
-        // Category main menu
-        var catMenu = {name: keyCategories[cat], items: {} };
-        for (var keyCode in keyCodes) {
-          if (keyCodes.hasOwnProperty(keyCode)) {
-            if (keyCodes[keyCode][2] == cat) {
-              // Category - key option
-              catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {name: keyCodes[keyCode][0]+' ('+keyCodes[keyCode][1]+')', callback: this.contextMenuKey.bind(this)};
+        if(keyCategories[cat] == '-----') {
+          var catMenu = "-----";
+        } else {
+          // Category main menu
+          var catMenu = {name: keyCategories[cat], items: {} };
+          for (var keyCode in keyCodes) {
+            if (keyCodes.hasOwnProperty(keyCode)) {
+              if (keyCodes[keyCode][2] == cat) {
+                // Category - key option
+                var name = keyCodes[keyCode][0] || keyCodes[keyCode][1];
+                catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {
+                  name: name,
+                  callback: this.contextMenuKey.bind(this)
+                };
+              }
             }
           }
         }
