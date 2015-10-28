@@ -184,6 +184,7 @@ export class LayoutMaker {
       "keyboard_layout": {
         "type": this.keyboardType,
         "description": $('input[name=layout-description]').val(),
+        "properties": {},
         "layers": []
       }
     };
@@ -193,7 +194,11 @@ export class LayoutMaker {
       for(var k=0; k< this.layout[i].length; k++) {
         keymap[k] = this.layout[i][k] || "KC_TRANSPARENT";
       }
-      jsn['keyboard_layout']['layers'].push({"description": $('.layer.layer-'+i+' input[name=layer-description]').val(), "keymap": keymap});
+      jsn['keyboard_layout']['layers'].push({
+        "description": $('.layer.layer-'+i+' input[name=layer-description]').val(),
+        "properties": {},
+        "keymap": keymap
+      });
 
     }
     console.log(JSON.stringify(jsn, null, "  "));

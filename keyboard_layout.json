@@ -1,9 +1,11 @@
 {
   "keyboard_layout": {
     "description": "dvorak",
+    "properties": {},
     "layers": [
       {
         "description": "customized dvorak with symbol row switched",
+        "properties": {},
         "keymap": [
           "ESC", "FN12", "FN12", "FN12", "FN12", "FN12", "BSLS",
           "TAB", "QUOT", "COMM", "DOT", "P", "Y", "FN2",
