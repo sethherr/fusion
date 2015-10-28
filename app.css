@@ -2,6 +2,11 @@ div.layer-template {
 	display: none;
 }
 
+div.layer svg {
+	display: block;
+	margin: auto;
+}
+
 text.label {
 	text-anchor: middle;
 }
