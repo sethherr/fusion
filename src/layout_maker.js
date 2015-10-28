@@ -1,5 +1,6 @@
 import {keyCodes} from 'keycodes';
 import {keyCategories} from 'keycodes';
+import {Layout} from 'layout';
 
 /**
  * LayoutMaker
@@ -15,7 +16,7 @@ export class LayoutMaker {
     this.container = container;
     this.selectedKey = null;
     this.selectedLayer = null;
-    this.layout = [];
+    this.layout = new Layout(keyboardType);
     this.nrOfLayers = 0;
   }
 
@@ -25,24 +26,18 @@ export class LayoutMaker {
    */
   addLayer() {
     var l = this.nrOfLayers;
-    this.layout[l] = [];
-    var $template = $('.layer-template.'+this.keyboardType).clone(false);
-    $template.attr('class', 'layer layer-'+l);
-    $template.attr('data-layer', l);
-    $(this.container).append($template);
-    $template.prepend('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control"><br/>');
-
-    // Setup handlers of all the keys
-    for(var i=0; i <= 80; i++) {
-      d3.select('.layer.layer-'+l+' .key.key-'+i).on("mouseover", function() {
-        d3.select(this).classed({highlight: true});
-      });
-      d3.select('.layer.layer-'+l+' .key.key-'+i).on('mouseout', function() {
-        d3.select(this).classed({highlight: false});
-      });
-      d3.select('.layer.layer-'+l+' .key.key-'+i).on('click', this.selectKey.bind(this));
-    }
+    var layer = this.layout.addLayer();
+    layer.draw(this.container, this.keyboardType, l);
     this.nrOfLayers++;
+
+    // The following will remove existing listners and re-apply for new elements
+    d3.selectAll('.layer .key').on('click', this.selectKey.bind(this));
+    d3.selectAll('.layer .key').on("mouseover", function() {
+      d3.select(this).classed({highlight: true});
+    });
+    d3.selectAll('.layer .key').on('mouseout', function() {
+      d3.select(this).classed({highlight: false});
+    });
   }
 
   /**
@@ -54,6 +49,7 @@ export class LayoutMaker {
     d3.select('body').on('keydown', this.pressedKey.bind(this));
     d3.select('body').on('keyup', this.pressedKey.bind(this));
     d3.select('#save').on('click', this.save.bind(this));
+    d3.select('#load').on('click', this.load.bind(this));
     d3.select('#add-layer').on('click', this.addLayer.bind(this));
 
     var items = {
@@ -99,7 +95,7 @@ export class LayoutMaker {
    * @param keyCode {Number} keycode
    */
   setKey(layer, key, keyCode, label) {
-    this.layout[layer][key-1] = keyCode;
+    this.layout.setKey(layer, key, keyCode, label);
 
     var $key = d3.select('.layer.layer-'+layer+' .key.key-'+key);
     var $text = d3.select('.layer.layer-'+layer+' .label.label-'+key);
@@ -125,6 +121,7 @@ export class LayoutMaker {
    * the user selects a key (using mouse)
    */
   selectKey() {
+    console.log('hi');
     var $this = $(d3.event.target);
     var key = $this.data('key');
     var layer = $this.closest('.layer').data('layer');
@@ -179,29 +176,18 @@ export class LayoutMaker {
    * the user wants to save the layout
    */
   save() {
-    // Each layout has 84 keys (14 rows 6 columns)
-    var jsn = {
-      "keyboard_layout": {
-        "type": this.keyboardType,
-        "description": $('input[name=layout-description]').val(),
-        "properties": {},
-        "layers": []
-      }
-    };
-
-    for(var i=0; i<this.layout.length; i++) {
-      var keymap = Array.apply(null, Array(84)).map(function (x, i) { return "KC_TRANSPARENT"; });
-      for(var k=0; k< this.layout[i].length; k++) {
-        keymap[k] = this.layout[i][k] || "KC_TRANSPARENT";
-      }
-      jsn['keyboard_layout']['layers'].push({
-        "description": $('.layer.layer-'+i+' input[name=layer-description]').val(),
-        "properties": {},
-        "keymap": keymap
-      });
-
-    }
+    var jsn = this.layout.toJSON();
     console.log(JSON.stringify(jsn, null, "  "));
     alert("Check browser console for JSON output");
+  }
+
+  load() {
+    var fileName = "keymap_ergodox_ez.json";
+    $.getJSON(fileName).success(function(data) {
+      console.log(data);
+      this.layout = new Layout(data);
+    }).fail(function() {
+      console.log("woops");
+    });
   }
 }
