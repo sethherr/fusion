@@ -9,6 +9,10 @@ As long as your keyboard firmware supports/uses [keycode.h](keycode.h) it should
 This project will output [JSON file](keyboard_layout.json) for the full layout (including layers),
 another tool is needed to convert these JSON files into firmware compatible .c or .h files. 
 
+## Demo
+
+You can play around on the [Demo environment](http://rocketcode.nl/fusion/)
+
 ## Quick Start
 
     npm install gulp -g
