@@ -11,7 +11,7 @@ export class LayoutMaker {
    * @param keyboardType {String} type of keyboard
    */
   constructor(container, keyboardType) {
-    this.keyboardType = keyboardType||'ergodox';
+    this.keyboardType = keyboardType||'ergodox-ez';
     this.container = container;
     this.selectedKey = null;
     this.selectedLayer = null;
