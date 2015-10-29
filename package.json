@@ -1,7 +1,7 @@
 {
-  "name": "keyboard-layout-maker",
+  "name": "fusion",
   "version": "1.0.0",
-  "description": "Keyboard Layout Maker",
+  "description": "keyboard-layout maker",
   "dependencies": {
     "bootstrap": "^3.3.5",
     "d3": "^3.5.6",
