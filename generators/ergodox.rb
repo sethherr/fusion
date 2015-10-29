@@ -81,7 +81,7 @@ puts header
 
 cols = [7,7,6,7,5,2,1,3,7,7,6,7,5,2,1,3]
 
-layout['keyboard_layout']['layers'].each do |layer|
+layout['layers'].each do |layer|
 
   puts "// #{layer['description']}"
   puts "KEYMAP("

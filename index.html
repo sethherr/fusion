@@ -30,7 +30,7 @@
     }
 
     System.import('layout_maker').then(function (layout_maker) {
-      var lm = new layout_maker.LayoutMaker("#keyboard-layers", getParameterByName('keyboardType'));
+      var lm = new layout_maker.LayoutMaker("#keyboard-layers", getParameterByName('keyboardType')||'ergodox-ez');
       lm.start();
     });
   </script>
@@ -62,7 +62,7 @@
           </li>
         </ul>
         <form class="navbar-form navbar-left" onsubmit="return false;">
-          <!--button class="btn btn-default" id="load">Load</button-->
+          <button class="btn btn-default" id="load">Load</button>
           <button class="btn btn-primary" id="save">Save</button>
           <button class="btn btn-default" id="add-layer">Add layer</button>
         </form>
@@ -81,7 +81,7 @@
           </ul>
         </div>
 
-        <input name="layout-description" placeholder="Provide an optional description of the layout" class="form-control"><br/>
+        <input id="layout-description" name="layout-description" placeholder="Provide an optional description of the layout" class="form-control"><br/>
       </div>
     </div>
   </div>
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-<div class="layer layer-template ergodox-ez">
+<div class="layer-template ergodox-ez">
 <svg data-layer="0" width="1000px" height="375px" viewBox="0 0 1000 375" version="1.1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g transform="translate(500.000000, 0.000000)">
@@ -182,7 +182,7 @@
 </svg>
 </div>
 
-<div class="layer layer-template planck">
+<div class="layer-template planck">
 <svg width="622px" height="206px" viewBox="0 0 622 206" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
   <g>
     <rect class="key key-47" data-key="47" x="572" y="156" width="50" height="50"></rect>
@@ -235,7 +235,7 @@
   </g>
 </svg>
 </div>
-<div class="layer layer-template preonic">
+<div class="layer-template preonic">
 <svg width="622px" height="258px" viewBox="0 0 622 258" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
   <g>
     <rect class="key key-59" data-key="59" x="572" y="208" width="50" height="50"></rect>

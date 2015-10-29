@@ -21,7 +21,7 @@ require 'json'
 
 layout = JSON.load(File.open(ARGV[0]))
 puts header
-layout['keyboard_layout']['layers'].each do |layer|
+layout['layers'].each do |layer|
 
   puts "// #{layer['description']}"
   puts "PREONIC_MIT("

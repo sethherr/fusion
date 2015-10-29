@@ -9,14 +9,14 @@ export class LayoutMaker {
   /**
    * Creates a new LayoutMaker
    * @param container {String} selector to the container
-   * @param keyboardType {String} type of keyboard
+   * @param type {String} type of keyboard
    */
-  constructor(container, keyboardType) {
-    this.keyboardType = keyboardType||'ergodox-ez';
+  constructor(container, type='ergodox-ez') {
+    this.type = type;
     this.container = container;
     this.selectedKey = null;
     this.selectedLayer = null;
-    this.layout = new Layout(keyboardType);
+    this.layout = new Layout(this, type);
     this.nrOfLayers = 0;
   }
 
@@ -27,17 +27,8 @@ export class LayoutMaker {
   addLayer() {
     var l = this.nrOfLayers;
     var layer = this.layout.addLayer();
-    layer.draw(this.container, this.keyboardType, l);
+    layer.draw(this.container, this.type, l);
     this.nrOfLayers++;
-
-    // The following will remove existing listners and re-apply for new elements
-    d3.selectAll('.layer .key').on('click', this.selectKey.bind(this));
-    d3.selectAll('.layer .key').on("mouseover", function() {
-      d3.select(this).classed({highlight: true});
-    });
-    d3.selectAll('.layer .key').on('mouseout', function() {
-      d3.select(this).classed({highlight: false});
-    });
   }
 
   /**
@@ -51,6 +42,7 @@ export class LayoutMaker {
     d3.select('#save').on('click', this.save.bind(this));
     d3.select('#load').on('click', this.load.bind(this));
     d3.select('#add-layer').on('click', this.addLayer.bind(this));
+    d3.select('#layout-description').on('change', this.setLayoutDescription.bind(this));
 
     var items = {
       clear: {name: "Clear", callback: this.contextMenuKey.bind(this) },
@@ -88,6 +80,10 @@ export class LayoutMaker {
     });
   }
 
+  setLayoutDescription() {
+    this.layout.description = d3.event.target.value;
+  }
+
   /**
    * Set key in layout
    * @param layer {Number} layer of the key
@@ -96,21 +92,11 @@ export class LayoutMaker {
    */
   setKey(layer, key, keyCode, label) {
     this.layout.setKey(layer, key, keyCode, label);
+  }
 
-    var $key = d3.select('.layer.layer-'+layer+' .key.key-'+key);
-    var $text = d3.select('.layer.layer-'+layer+' .label.label-'+key);
-    var $wrapper = $key.node().parentNode;
-
-    if ($text.empty()) {
-      $text = d3.select($wrapper).append('text')
-        .attr('class', 'label label-'+key)
-        .attr('x', +$key.attr('x') + $key.attr('width')/2)
-        .attr('y', +$key.attr('y'));
-
-      $text.append('tspan').attr('dx', 0).attr('dy', 30).html(label);
-    } else {
-      $text.select('text tspan').html(label);
-    }
+  setLayout(data) {
+    this.layout.destroy();
+    this.layout = new Layout(this, data.type, data.description, data.properties, data.layers);
   }
 
   /*
@@ -121,7 +107,6 @@ export class LayoutMaker {
    * the user selects a key (using mouse)
    */
   selectKey() {
-    console.log('hi');
     var $this = $(d3.event.target);
     var key = $this.data('key');
     var layer = $this.closest('.layer').data('layer');
@@ -182,10 +167,10 @@ export class LayoutMaker {
   }
 
   load() {
+    var self = this;
     var fileName = "keymap_ergodox_ez.json";
     $.getJSON(fileName).success(function(data) {
-      console.log(data);
-      this.layout = new Layout(data);
+      self.setLayout(data);
     }).fail(function() {
       console.log("woops");
     });

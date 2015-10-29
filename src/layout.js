@@ -7,20 +7,34 @@ export class Layout {
   /**
    * Creates a new Layout
    */
-  constructor(keyboardType) {
-    this.keyboardType = keyboardType || 'ergodox-ez';
-    this.properties = {};
+  constructor(maker, type="ergodox-ez", description="", properties={}, layers=[]) {
+    this.maker = maker;
+    this.type = type;
+    this.description = description;
+    this.properties = properties;
     this.layers = [];
+    this.nrOfLayers = 0;
+    layers.forEach((l, i) => {
+      var l = new Layer(this, l.description, l.properties, l.keymap);
+      // TODO: Remove parameters
+      l.draw("#keyboard-layers", this.type, i);
+      this.layers.push(l);
+    });
+  }
+
+  destroy() {
+    $(".layer").remove();
   }
 
   addLayer() {
-    var l = new Layer();
+    var l = new Layer(this);
     this.layers.push(l);
+    this.nrOfLayers++;
     return l;
   }
 
   setKey(layer, key, keyCode, label) {
-    this.layers[layer].setKey(key, keyCode, label);
+    this.layers[layer].setKey(layer, key, keyCode, label);
   }
 
   /**
@@ -29,7 +43,7 @@ export class Layout {
   toJSON() {
     var jsn = {
       "keyboard_layout": {
-        "type": this.keyboardType,
+        "type": this.type,
         "description": this.description,
         "properties": {},
         "layers": this.layers.map(function (l) { return l.toJSON(); })
