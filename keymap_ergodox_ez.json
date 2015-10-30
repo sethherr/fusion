@@ -60,8 +60,8 @@
           "label": "T"
         },
         {
-          "code": "KC_TRANSPARENT",
-          "label": ""
+          "code": "TO(1)",
+          "label": "TO1"
         },
         {
           "code": "KC_BSPACE",
@@ -188,8 +188,8 @@
           "label": "-"
         },
         {
-          "code": "KC_TRANSPARENT",
-          "label": ""
+          "code": "TO(1)",
+          "label": "TO1"
         },
         {
           "code": "KC_Y",
@@ -733,7 +733,7 @@
         },
         {
           "code": "KC_MS_UP",
-          "label": ""
+          "label": "msup"
         },
         {
           "code": "KC_TRANSPARENT",
@@ -757,15 +757,15 @@
         },
         {
           "code": "KC_MS_LEFT",
-          "label": ""
+          "label": "MsLeft"
         },
         {
           "code": "KC_MS_DOWN",
-          "label": ""
+          "label": "MsDown"
         },
         {
           "code": "KC_MS_RIGHT",
-          "label": ""
+          "label": "MsRight"
         },
         {
           "code": "KC_TRANSPARENT",
@@ -812,12 +812,12 @@
           "label": ""
         },
         {
-          "code": "KC_MS_LEFT",
-          "label": ""
+          "code": "KC_MS_BTN3",
+          "label": "Lclk"
         },
         {
-          "code": "KC_MS_RIGHT",
-          "label": ""
+          "code": "KC_MS_BTN2",
+          "label": "Rclk"
         },
         {
           "code": "KC_TRANSPARENT",
@@ -921,7 +921,7 @@
         },
         {
           "code": "KC_MEDIA_PLAY_PAUSE",
-          "label": ""
+          "label": "Play"
         },
         {
           "code": "KC_TRANSPARENT",
@@ -937,11 +937,11 @@
         },
         {
           "code": "KC_MEDIA_PREV_TRACK",
-          "label": ""
+          "label": "Prev"
         },
         {
           "code": "KC_MEDIA_NEXT_TRACK",
-          "label": ""
+          "label": "Next"
         },
         {
           "code": "KC_TRANSPARENT",
