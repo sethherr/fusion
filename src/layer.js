@@ -36,7 +36,9 @@ export class Layer {
   }
 
   draw(container, keyboardType, l) {
-    var $layerContainer = $(container).append('<div class="layer-container layer-container-'+l+'"></div>')
+    var $layerContainer = $(container).append('<div></div>');
+    $layerContainer.attr('class', 'layer-container layer-container-'+l);
+    $layerContainer.data('layer', l);
     $layerContainer.append('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
 
     var $template = $('.layer-template.'+keyboardType).clone(false);
@@ -49,9 +51,6 @@ export class Layer {
       this.setKey(l, i, k.code, k.label);
     });
 
-    $('.layer .key, .layer .key .label').on('click', this.layout.maker.selectKey.bind(this.layout.maker));
-    $('.layer.layer-'+l+' input').on('change', this.setDescription.bind(this));
-
     $(document).ready(function () {
       $(".keytop").each(function () {
         $(this).height($(this).parent().height() - 13);
@@ -63,7 +62,6 @@ export class Layer {
 
   setDescription(event) {
     this.description = $(event.target).val();
-    console.log(this.description);
   }
 
   toJSON() {

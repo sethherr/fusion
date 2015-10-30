@@ -24,7 +24,7 @@ export class Layout {
   }
 
   destroy() {
-    $(".layer-container").remove();
+    $(this.maker.container).empty();
   }
 
   addLayer() {

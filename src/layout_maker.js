@@ -44,6 +44,9 @@ export class LayoutMaker {
     $('#add-layer').on('click', this.addLayer.bind(this));
     $('#layout-description').on('change', this.setLayoutDescription.bind(this));
 
+    $(document).on('click', '.layer .key, .layer .key .label', this.selectKey.bind(this));
+    $(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
+
     var items = {
       clear: {name: "Clear", callback: this.contextMenuKey.bind(this) },
       separator1: "-----"
@@ -78,6 +81,12 @@ export class LayoutMaker {
       selector: ".key",
       items: items
     });
+  }
+
+  setLayerDescription(event) {
+    var $layerContainer = $(event.target).closest('.layer-container');
+    var layer = +$layerContainer.data('layer');
+    this.layout.layers[layer].description = $(event.target).val();
   }
 
   setLayoutDescription() {
