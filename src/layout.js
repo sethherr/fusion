@@ -7,7 +7,7 @@ export class Layout {
   /**
    * Creates a new Layout
    */
-  constructor(maker, type="ergodox-ez", description="", properties={}, layers=[]) {
+  constructor(maker, type="ergodox_ez", description="", properties={}, layers=[]) {
     this.maker = maker;
     this.type = type;
     this.description = description;

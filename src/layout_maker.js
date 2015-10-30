@@ -11,7 +11,7 @@ export class LayoutMaker {
    * @param container {String} selector to the container
    * @param type {String} type of keyboard
    */
-  constructor(container, type='ergodox-ez') {
+  constructor(container, type='ergodox_ez') {
     this.type = type;
     this.container = container;
     this.selectedKey = null;
