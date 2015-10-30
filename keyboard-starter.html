@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keyboard Starter</title>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <style type="text/css">
+    *,
+    *:before,
+    *:after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .layer-template {
+      display: block;
+      position: relative;
+      margin-top: 0px;
+      margin-left: 0px;
+      background-color: #f5e79e;
+    }
+
+    .key {
+      border: 1px solid black;
+      width: 54px;
+      height: 54px;
+      position: absolute;
+      border-radius: 5px;
+      background-color: #cccccc;
+      padding: 0;
+      margin: 0;
+    }
+
+    .key:hover {
+      border: 1px solid deepskyblue;
+    }
+
+    .key.selected {
+      border: 1px solid red;
+    }
+
+    .keytop {
+      background-color: #fcfcfc;
+      border: solid 1px #aaa;
+      border-radius: 3px;
+      display: block;
+      position: relative;
+      margin-top: 3px;
+      margin-left: 3px;
+      margin-right: 3px;
+      margin-bottom: 8px;
+    }
+
+  </style>
+  <script>
+    $(document).ready(function () {
+      $(".keytop").each(function () {
+        $(this).height($(this).parent().height() - 13);
+        $(this).width($(this).parent().width() - 8);
+      });
+    });
+
+  </script>
+</head>
+<body>
+
+<!-- Make sure width and height are correct
+
+ Here's a table to help with top/left
+    0
+   54
+  108
+  162
+  216
+  270
+  324
+  378
+  432
+  486
+  540
+  594
+
+-->
+<div class="layer-template starter"  style="width: 162px; height: 162px;">
+  <div class="key" style="top:   0px; left:   0px; width: 108px;"><div class="keytop"></div></div>
+  <div class="key" style="top:   0px; left: 108px;"><div class="keytop"></div></div>
+  <div class="key" style="top:  54px; left:   0px;"><div class="keytop"></div></div>
+  <div class="key" style="top:  54px; left:  54px;"><div class="keytop"></div></div>
+  <div class="key" style="top:  54px; left: 108px; height: 108px;"><div class="keytop"></div></div>
+  <div class="key" style="top: 108px; left:   0px;"><div class="keytop"></div></div>
+  <div class="key" style="top: 108px; left:  54px;"><div class="keytop"></div></div>
+</div>
+
+</body>
+</html>
