@@ -18,13 +18,13 @@ export class Layer {
   setKey(layer, key, keyCode, label) {
     this.keymap[key] = {code: keyCode, label: label};
 
-    var $key = $('.layer.layer-'+layer+' .key.key-'+key);
+    var $key = $('.layer.layer-'+layer+' .key[data-key='+key+']');
 
     if($key.length == 0) {
       return;
     }
 
-    var $text = $('.layer.layer-'+layer+' .key.key-'+key+' .label');
+    var $text = $('.layer.layer-'+layer+' .key[data-key='+key+'] .label');
     var $wrapper = $key.find('.keytop');
 
     if ($text.length == 0) {

@@ -121,7 +121,7 @@ export class LayoutMaker {
     var layer = $this.closest('.layer').data('layer');
 
     if (this.selectedLayer != null && this.selectedKey != null) {
-      $('.layer.layer-'+this.selectedLayer+' .key.key-'+this.selectedKey).removeClass('selected');
+      $('.layer.layer-'+this.selectedLayer+' .key[data-key='+this.selectedKey+']').removeClass('selected');
     }
     if (this.selectedKey != key || this.selectedLayer != layer) {
       $this.addClass('selected');
