@@ -16,53 +16,53 @@ export class Layer {
   }
 
   setKey(layer, key, keyCode, label) {
-    this.keymap[key-1] = {code: keyCode, label: label};
+    this.keymap[key] = {code: keyCode, label: label};
 
-    var $key = d3.select('.layer.layer-'+layer+' .key.key-'+key);
-    if($key.empty()) {
+    var $key = $('.layer.layer-'+layer+' .key.key-'+key);
+
+    if($key.length == 0) {
       return;
     }
-    var $text = d3.select('.layer.layer-'+layer+' .label.label-'+key);
-    var $wrapper = $key.node().parentNode;
 
-    if ($text.empty()) {
-      $text = d3.select($wrapper).append('text')
-        .attr('class', 'label label-'+key)
-        .attr('x', +$key.attr('x') + $key.attr('width')/2)
-        .attr('y', +$key.attr('y'));
+    var $text = $('.layer.layer-'+layer+' .key.key-'+key+' .label');
+    var $wrapper = $key.find('.keytop');
 
-      $text.append('tspan').attr('dx', 0).attr('dy', 30).html(label);
+    if ($text.length == 0) {
+      $text = $($wrapper).append('<div class="label label-c-c">'+label+'</div>')
     } else {
-      $text.select('text tspan').html(label);
+      $text.html(label);
     }
 
   }
 
   draw(container, keyboardType, l) {
+    var $layerContainer = $(container).append('<div class="layer-container layer-container-'+l+'"></div>')
+    $layerContainer.append('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
+
     var $template = $('.layer-template.'+keyboardType).clone(false);
     $template.attr('class', 'layer layer-'+l);
     $template.attr('data-layer', l);
-    $(container).append($template);
-    $template.prepend('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
+
+    $layerContainer.append($template);
 
     this.keymap.forEach((k, i) => {
-      this.setKey(l, i+1, k.code, k.label);
+      this.setKey(l, i, k.code, k.label);
     });
 
-    // The following will remove existing listners and re-apply for new elements
-    d3.selectAll('.layer .key').on('click', this.layout.maker.selectKey.bind(this.layout.maker));
-    d3.selectAll('.layer .key').on("mouseover", function() {
-      d3.select(this).classed({highlight: true});
+    $('.layer .key, .layer .key .label').on('click', this.layout.maker.selectKey.bind(this.layout.maker));
+    $('.layer.layer-'+l+' input').on('change', this.setDescription.bind(this));
+
+    $(document).ready(function () {
+      $(".keytop").each(function () {
+        $(this).height($(this).parent().height() - 13);
+        $(this).width($(this).parent().width() - 8);
+      });
     });
-    d3.selectAll('.layer .key').on('mouseout', function() {
-      d3.select(this).classed({highlight: false});
-    });
-    d3.select('.layer.layer-'+l+' input').on('change', this.setDescription.bind(this));
 
   }
 
-  setDescription() {
-    this.description = d3.event.target.value;
+  setDescription(event) {
+    this.description = $(event.target).val();
     console.log(this.description);
   }
 

@@ -1,31 +1,131 @@
-div.layer-template {
+.layer-template {
 	display: none;
 }
 
-div.layer svg {
+.layer {
 	display: block;
-	margin: auto;
+	position: relative;
+	margin-top: 0px;
+	margin-left: 0px;
+    height: 500px;
 }
 
-text.label {
-	text-anchor: middle;
+.key {
+	border: 1px solid black;
+	width: 54px;
+	height: 54px;
+	position: absolute;
+	border-radius: 5px;
+	background-color: #cccccc;
+	padding: 0;
+	margin: 0;
 }
 
-.label tspan {
-	font-family: Helvetica;
+.key:hover {
+	border: 1px solid deepskyblue;
+}
+
+.key.selected {
+	border: 1px solid red;
+}
+
+.keytop {
+	background-color: #fcfcfc;
+	border: solid 1px #aaa;
+	border-radius: 3px;
+	display: block;
+	position: relative;
+	margin-top: 3px;
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-bottom: 8px;
+}
+
+.label {
+	font-family: "Helvetica";
 	font-size: 12px;
-	font-weight: normal;
-	fill: #666;
+	line-height: 12px;
+	position: absolute;
+    color: #000;
+    font-weight: normal;
 }
 
-rect.key {
-  fill: #eee;
+.label-t-l {
+	top: 2px;
+	left: 2px;
+	text-align: left;
 }
 
-rect.highlight {
-  fill: #e0e0e0;
+.label-t-c {
+	top: 2px;
+	left: calc(50% - 26px);
+	width: 52px;
+	text-align: center;
 }
 
-rect.selected {
-  fill: #aaa;
+.label-t-r {
+	top: 2px;
+	right: 2px;
+	text-align: right;
+}
+
+.label-c-l {
+	top: calc(50% - 6px);
+	left: 2px;
+	text-align: left;
+}
+
+.label-c-c {
+	top: calc(50% - 6px);
+	left: calc(50% - 26px);
+	width: 52px;
+	text-align: center;
+}
+
+.label-c-r {
+	top: calc(50% - 6px);
+	right: 2px;
+	text-align: right;
+}
+
+.label-b-l {
+	bottom: 2px;
+	left: 2px;
+	text-align: left;
+}
+
+.label-b-c {
+	bottom: 2px;
+	left: calc(50% - 26px);
+	width: 52px;
+	text-align: center;
+}
+
+.label-b-r {
+	bottom: 2px;
+	right: 2px;
+	text-align: right;
+}
+
+.label-f-l {
+	bottom: -11px;
+	left: 2px;
+	text-align: left;
+}
+
+.label-f-c {
+	bottom: -11px;
+	left: calc(50% - 26px);
+	width: 52px;
+	text-align: center;
+}
+
+.label-f-r {
+	bottom: -11px;
+	right: 2px;
+	text-align: right;
+}
+
+.thumbpad {
+	position: relative;
 }

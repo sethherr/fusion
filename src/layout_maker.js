@@ -37,12 +37,12 @@ export class LayoutMaker {
   start() {
     this.addLayer();
 
-    d3.select('body').on('keydown', this.pressedKey.bind(this));
-    d3.select('body').on('keyup', this.pressedKey.bind(this));
-    d3.select('#save').on('click', this.save.bind(this));
-    d3.select('#load').on('click', this.load.bind(this));
-    d3.select('#add-layer').on('click', this.addLayer.bind(this));
-    d3.select('#layout-description').on('change', this.setLayoutDescription.bind(this));
+    $('body').on('keydown', this.pressedKey.bind(this));
+    $('body').on('keyup', this.pressedKey.bind(this));
+    $('#save').on('click', this.save.bind(this));
+    $('#load').on('click', this.load.bind(this));
+    $('#add-layer').on('click', this.addLayer.bind(this));
+    $('#layout-description').on('change', this.setLayoutDescription.bind(this));
 
     var items = {
       clear: {name: "Clear", callback: this.contextMenuKey.bind(this) },
@@ -81,7 +81,7 @@ export class LayoutMaker {
   }
 
   setLayoutDescription() {
-    this.layout.description = d3.event.target.value;
+    this.layout.description = $(this).val()
   }
 
   /**
@@ -106,16 +106,16 @@ export class LayoutMaker {
   /**
    * the user selects a key (using mouse)
    */
-  selectKey() {
-    var $this = $(d3.event.target);
+  selectKey(event) {
+    var $this = $(event.target).closest('.key');
     var key = $this.data('key');
     var layer = $this.closest('.layer').data('layer');
 
     if (this.selectedLayer != null && this.selectedKey != null) {
-      d3.select('.layer.layer-'+this.selectedLayer+' .key.key-'+this.selectedKey).classed({selected: false});
+      $('.layer.layer-'+this.selectedLayer+' .key.key-'+this.selectedKey).removeClass('selected');
     }
     if (this.selectedKey != key || this.selectedLayer != layer) {
-      d3.select(d3.event.target).classed({selected: true});
+      $this.addClass('selected');
       this.selectedKey = key;
       this.selectedLayer = layer;
     } else {
@@ -143,16 +143,16 @@ export class LayoutMaker {
   /**
    * user pressed a key
    */
-  pressedKey() {
+  pressedKey(event) {
     if(this.selectedKey != null && this.selectedLayer != null) {
-      if (!keyCodes[d3.event.keyCode]) {
+      if (!keyCodes[event.keyCode]) {
         console.log("Key not recognised, please report.");
-        console.log(d3.event);
+        console.log(e);
         return;
       }
 
-      this.setKey(this.selectedLayer, this.selectedKey, keyCodes[d3.event.keyCode][1], keyCodes[d3.event.keyCode][0]);
-      d3.event.preventDefault();
+      this.setKey(this.selectedLayer, this.selectedKey, keyCodes[event.keyCode][1], keyCodes[event.keyCode][0]);
+      event.preventDefault();
       return false;
     }
   }

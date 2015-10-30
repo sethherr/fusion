@@ -20,11 +20,11 @@ export class Layout {
       l.draw("#keyboard-layers", this.type, i);
       this.layers.push(l);
     });
-    d3.select('#layout-description').node().value = description;
+    $('#layout-description').val(description);
   }
 
   destroy() {
-    $(".layer").remove();
+    $(".layer-container").remove();
   }
 
   addLayer() {
