@@ -43,12 +43,12 @@ export class Layout {
    */
   toJSON() {
     var jsn = {
-      "keyboard_layout": {
-        "type": this.type,
-        "description": this.description,
-        "properties": {},
-        "layers": this.layers.map(function (l) { return l.toJSON(); })
-      }
+      "type": this.type,
+      "description": this.description,
+      "properties": {},
+      "layers": this.layers.map(function (l) {
+        return l.toJSON();
+      })
     };
 
     return jsn;

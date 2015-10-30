@@ -16,7 +16,7 @@ export class Layer {
   }
 
   setKey(layer, key, keyCode, label) {
-    this.keymap[key-1] = keyCode;
+    this.keymap[key-1] = {code: keyCode, label: label};
 
     var $key = d3.select('.layer.layer-'+layer+' .key.key-'+key);
     if($key.empty()) {
@@ -46,7 +46,7 @@ export class Layer {
     $template.prepend('<h1>Layer '+(l+1)+'</h1><input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
 
     this.keymap.forEach((k, i) => {
-      this.setKey(l, i+1, k, k);
+      this.setKey(l, i+1, k.code, k.label);
     });
 
     // The following will remove existing listners and re-apply for new elements
@@ -71,7 +71,13 @@ export class Layer {
     var json = {
       "description": this.description,
       "properties": this.properties,
-      "keymap": Array.apply(null, Array(84)).map(function (x, i) { return self.keymap[i]||"KC_TRANSPARENT"; })
+      "keymap": Array.apply(null, Array(84)).map(function (x, i) {
+        var key = self.keymap[i];
+        if(!key) {
+          key = {code: "KC_TRANSPARENT", label: ""}
+        }
+        return key;
+      })
     };
 
     return json;
