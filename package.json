@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ErgoDox-EZ/keyboard-layout-maker.git"
+    "url": "git+https://github.com/ErgoDox-EZ/fusion.git"
   },
   "author": "Tom de Grunt <tom@degrunt.nl>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ErgoDox-EZ/keyboard-layout-maker/issues"
+    "url": "https://github.com/ErgoDox-EZ/fusion/issues"
   },
-  "homepage": "https://github.com/ErgoDox-EZ/keyboard-layout-maker#readme"
+  "homepage": "https://github.com/ErgoDox-EZ/fusion#readme"
 }
