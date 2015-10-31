@@ -15,9 +15,8 @@ export class LayoutMaker {
     this.type = type;
     this.container = container;
     this.selectedKey = null;
-    this.selectedLayer = null;
     this.layout = new Layout(this, type);
-    this.nrOfLayers = 0;
+    this.activeLayer = 0;
   }
 
   /**
@@ -25,10 +24,18 @@ export class LayoutMaker {
    * adds a layer to the layout
    */
   addLayer() {
-    var l = this.nrOfLayers;
     var layer = this.layout.addLayer();
-    layer.draw(this.container, this.type, l);
-    this.nrOfLayers++;
+    this.switchLayer(this.layout.layers.length-1);
+  }
+
+  /**
+   * switchLayer
+   */
+  switchLayer(l) {
+    this.selectedKey = null;
+    this.activeLayer = l;
+    this.layout.layers[l].draw();
+    $("#layer-dropdown").val(l);
   }
 
   /**
@@ -41,8 +48,9 @@ export class LayoutMaker {
     $('body').on('keyup', this.pressedKey.bind(this));
     $('#save').on('click', this.save.bind(this));
     $('#load').on('click', this.load.bind(this));
-    $('#add-layer').on('click', this.addLayer.bind(this));
+    $('.add-layer').on('click', this.addLayer.bind(this));
     $('#layout-description').on('change', this.setLayoutDescription.bind(this));
+    $('#layer-dropdown').on('change', this.changeLayerDropdown.bind(this));
 
     $(document).on('click', '.layer .key, .layer .key .label', this.selectKey.bind(this));
     $(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
@@ -95,22 +103,28 @@ export class LayoutMaker {
 
   /**
    * Set key in layout
-   * @param layer {Number} layer of the key
    * @param key {Number} key position of the key (within the layer)
    * @param keyCode {Number} keycode
+   * @param label {String} label
    */
-  setKey(layer, key, keyCode, label) {
-    this.layout.setKey(layer, key, keyCode, label);
+  setKey(key, keyCode, label) {
+    this.layout.setKey(this.activeLayer, key, keyCode, label);
   }
 
   setLayout(data) {
     this.layout.destroy();
     this.layout = new Layout(this, data.type, data.description, data.properties, data.layers);
+    this.layout.layers[0].draw();
   }
 
   /*
    * EVENT HANDLERS
    */
+
+  changeLayerDropdown(event) {
+    var l = +$(event.target).val();
+    this.switchLayer(l);
+  }
 
   /**
    * the user selects a key (using mouse)
@@ -118,18 +132,16 @@ export class LayoutMaker {
   selectKey(event) {
     var $this = $(event.target).closest('.key');
     var key = $this.data('key');
-    var layer = $this.closest('.layer').data('layer');
+    var layer = this.activeLayer;
 
-    if (this.selectedLayer != null && this.selectedKey != null) {
-      $('.layer.layer-'+this.selectedLayer+' .key[data-key='+this.selectedKey+']').removeClass('selected');
+    if (this.selectedKey != null) {
+      $('.layer .key[data-key='+this.selectedKey+']').removeClass('selected');
     }
-    if (this.selectedKey != key || this.selectedLayer != layer) {
+    if (this.selectedKey != key) {
       $this.addClass('selected');
       this.selectedKey = key;
-      this.selectedLayer = layer;
     } else {
       this.selectedKey = null;
-      this.selectedLayer = null;
     }
   }
 
@@ -139,13 +151,12 @@ export class LayoutMaker {
   contextMenuKey(optionKey, option) {
     var $this = $(option.$trigger);
     var key = $this.data('key');
-    var layer = $this.closest('.layer').data('layer');
 
     var what = optionKey.split('|');
     if(what[0] == 'clear') {
-      this.setKey(layer, key, '', '');
+      this.setKey(key, '', '');
     } else if(what[0] == 'set') {
-      this.setKey(layer, key, what[1], what[2]);
+      this.setKey(key, what[1], what[2]);
     }
   }
 
@@ -153,14 +164,14 @@ export class LayoutMaker {
    * user pressed a key
    */
   pressedKey(event) {
-    if(this.selectedKey != null && this.selectedLayer != null) {
+    if(this.selectedKey != null) {
       if (!keyCodes[event.keyCode]) {
         console.log("Key not recognised, please report.");
         console.log(e);
         return;
       }
 
-      this.setKey(this.selectedLayer, this.selectedKey, keyCodes[event.keyCode][1], keyCodes[event.keyCode][0]);
+      this.setKey(this.selectedKey, keyCodes[event.keyCode][1], keyCodes[event.keyCode][0]);
       event.preventDefault();
       return false;
     }

@@ -13,29 +13,29 @@ export class Layout {
     this.description = description;
     this.properties = properties;
     this.layers = [];
-    this.nrOfLayers = 0;
     layers.forEach((l, i) => {
       var l = new Layer(this, l.description, l.properties, l.keymap);
-      // TODO: Remove parameters
-      l.draw("#keyboard-layers", this.type, i);
+      $("#layer-dropdown").append('<option value="'+i+'">Layer '+(i+1)+'</option>');
       this.layers.push(l);
     });
+
     $('#layout-description').val(description);
   }
 
   destroy() {
     $(this.maker.container).empty();
+    $("#layer-dropdown").empty();
   }
 
   addLayer() {
     var l = new Layer(this);
+    $("#layer-dropdown").append('<option value="'+this.layers.length+'">Layer '+(this.layers.length+1)+'</option>');
     this.layers.push(l);
-    this.nrOfLayers++;
     return l;
   }
 
   setKey(layer, key, keyCode, label) {
-    this.layers[layer].setKey(layer, key, keyCode, label);
+    this.layers[layer].setKey(key, keyCode, label);
   }
 
   /**

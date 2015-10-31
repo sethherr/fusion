@@ -7,7 +7,6 @@
 	position: relative;
 	margin-top: 0px;
 	margin-left: 0px;
-    height: 500px;
 }
 
 .key {
@@ -41,86 +40,87 @@
 	margin-bottom: 8px;
 }
 
-.label {
+.l {
 	font-family: "Helvetica";
 	font-size: 12px;
 	line-height: 12px;
 	position: absolute;
     color: #000;
     font-weight: normal;
+    padding: 0px;
 }
 
-.label-t-l {
+.l-t-l {
 	top: 2px;
 	left: 2px;
 	text-align: left;
 }
 
-.label-t-c {
+.l-t-c {
 	top: 2px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.label-t-r {
+.l-t-r {
 	top: 2px;
 	right: 2px;
 	text-align: right;
 }
 
-.label-c-l {
+.l-c-l {
 	top: calc(50% - 6px);
 	left: 2px;
 	text-align: left;
 }
 
-.label-c-c {
+.l-c-c {
 	top: calc(50% - 6px);
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.label-c-r {
+.l-c-r {
 	top: calc(50% - 6px);
 	right: 2px;
 	text-align: right;
 }
 
-.label-b-l {
+.l-b-l {
 	bottom: 2px;
 	left: 2px;
 	text-align: left;
 }
 
-.label-b-c {
+.l-b-c {
 	bottom: 2px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.label-b-r {
+.l-b-r {
 	bottom: 2px;
 	right: 2px;
 	text-align: right;
 }
 
-.label-f-l {
+.l-f-l {
 	bottom: -11px;
 	left: 2px;
 	text-align: left;
 }
 
-.label-f-c {
+.l-f-c {
 	bottom: -11px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.label-f-r {
+.l-f-r {
 	bottom: -11px;
 	right: 2px;
 	text-align: right;
