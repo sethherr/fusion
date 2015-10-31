@@ -12,8 +12,7 @@ another tool is needed to convert these JSON files into firmware compatible .c o
 
 ## Reactor
 
-Reactor is the firmware generator part of Fusion, currently it resides in the 'generators' folder.
-Eventually it will move to it's own repository. The intention for it is to be installed as a service somewhere.
+[Reactor](https://github.com/ErgoDox-EZ/reactor) is the firmware generator part of Fusion, which is to be installed as a service somewhere.
 It will take the JSON's exported by the Fusion project and process them in to ready-to-be-uploaded firmware. 
 
 Reactor uses the awesome [qmk_firmware](http://github.com/jackhumbert/qmk_firmware) by Jack Humbert.
