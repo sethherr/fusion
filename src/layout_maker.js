@@ -69,6 +69,7 @@ export class LayoutMaker {
     $('#layer-description').on('change', this.setLayerDescription.bind(this));
     $('#layer-dropdown').on('change', this.changeLayerDropdown.bind(this));
     $("#menu-toggle").on('click', this.toggleSidebar.bind(this));
+    $(".key-label").on('change', this.changeKeyLabel.bind(this));
 
     $(document).on('click', '.layer .key, .layer .key .label', this.selectKey.bind(this));
     //$(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
@@ -109,12 +110,6 @@ export class LayoutMaker {
     });
   }
 
-  //setLayerDescription(event) {
-  //  var $layerContainer = $(event.target).closest('.layer-container');
-  //  var layer = +$layerContainer.data('layer');
-  //  this.layout.layers[layer].description = $(event.target).val();
-  //}
-
   setLayoutDescription(event) {
     this.layout.description = $(even.target).val()
   }
@@ -130,8 +125,7 @@ export class LayoutMaker {
    * @param label {String} label
    */
   setKey(key, keyCode, label) {
-    $("#key-keycode").val(keyCode);
-    $("#key-l-t-l").val(label);
+    this.drawKeyPanel(true);
     this.layout.setKey(this.activeLayer, key, keyCode, label);
   }
 
@@ -142,6 +136,23 @@ export class LayoutMaker {
     this.layout.layers[0].draw();
   }
 
+  drawKeyPanel(visible) {
+    if(visible) {
+      var key = this.layout.layers[this.activeLayer].keymap[this.selectedKey];
+      $("#key-panel .panel-heading").html(`Key ${this.selectedKey}`);
+      if(key) {
+        $("#key-keycode").val(key.code);
+        $("#key-l-tl").val(key.label);
+      } else {
+        $("#key-keycode").val('');
+        $("#key-l-tl").val('');
+      }
+      $("#key-panel").show();
+    } else {
+      $("#key-panel").hide();
+    }
+  }
+
   /*
    * EVENT HANDLERS
    */
@@ -149,6 +160,17 @@ export class LayoutMaker {
   changeLayerDropdown(event) {
     var l = +$(event.target).val();
     this.switchLayer(l);
+  }
+
+  changeKeyLabel(event) {
+    var $label = $(event.target);
+    var classes = $label.attr("class").split(' ');
+    classes.forEach(c => {
+      if(c.indexOf('key-label-') >= 0) {
+        var labelType = c.slice(10);
+        // TODO: Set label
+      }
+    });
   }
 
   /**
@@ -165,12 +187,9 @@ export class LayoutMaker {
     if (this.selectedKey != key) {
       $this.addClass('selected');
       this.selectedKey = key;
-
-      $("#key-panel .panel-heading").html(`Key ${key}`);
-
-      $("#key-panel").show();
+      this.drawKeyPanel(true);
     } else {
-      $("#key-panel").hide();
+      this.drawKeyPanel(false);
       this.selectedKey = null;
     }
   }
@@ -194,7 +213,9 @@ export class LayoutMaker {
    * user pressed a key
    */
   pressedKey(event) {
-    if(this.selectedKey != null) {
+    var focussedElement = $("*:focus");
+
+    if(this.selectedKey != null && focussedElement.length == 0) {
       if (!keyCodes[event.keyCode]) {
         console.log("Key not recognised, please report.");
         console.log(e);

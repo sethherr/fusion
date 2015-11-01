@@ -47,77 +47,77 @@
     padding: 0px;
 }
 
-.l-t-l {
+.l-tl {
 	top: 2px;
 	left: 2px;
 	text-align: left;
 }
 
-.l-t-c {
+.l-tc {
 	top: 2px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.l-t-r {
+.l-tr {
 	top: 2px;
 	right: 2px;
 	text-align: right;
 }
 
-.l-c-l {
+.l-cl {
 	top: calc(50% - 6px);
 	left: 2px;
 	text-align: left;
 }
 
-.l-c-c {
+.l-cc {
 	top: calc(50% - 6px);
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.l-c-r {
+.l-cr {
 	top: calc(50% - 6px);
 	right: 2px;
 	text-align: right;
 }
 
-.l-b-l {
+.l-bl {
 	bottom: 2px;
 	left: 2px;
 	text-align: left;
 }
 
-.l-b-c {
+.l-bc {
 	bottom: 2px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.l-b-r {
+.l-br {
 	bottom: 2px;
 	right: 2px;
 	text-align: right;
 }
 
-.l-f-l {
+.l-fl {
 	bottom: -11px;
 	left: 2px;
 	text-align: left;
 }
 
-.l-f-c {
+.l-fc {
 	bottom: -11px;
 	left: calc(50% - 26px);
 	width: 52px;
 	text-align: center;
 }
 
-.l-f-r {
+.l-fr {
 	bottom: -11px;
 	right: 2px;
 	text-align: right;

@@ -32,11 +32,11 @@ export class Layer {
     }
 
     var key = this.keymap[k];
-    var $label = $key.find('.l.l-t-l');
+    var $label = $key.find('.l.l-tl');
     var $wrapper = $key.find('.keytop');
 
     if ($label.length == 0) {
-      $label = $($wrapper).append('<div class="l l-t-l">'+key.label+'</div>');
+      $label = $($wrapper).append('<div class="l l-tl">'+key.label+'</div>');
     } else {
       $label.html(key.label);
     }
