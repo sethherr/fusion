@@ -113,6 +113,7 @@ export class LayoutMaker {
 
   setLayout(data) {
     this.layout.destroy();
+    this.type = data.type;
     this.layout = new Layout(this, data.type, data.description, data.properties, data.layers);
     this.layout.layers[0].draw();
   }
