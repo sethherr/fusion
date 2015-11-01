@@ -40,8 +40,12 @@ export class Layer {
     $layerContainer.attr('class', 'layer-container');
     $layerContainer.append('<input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
 
+    var $spacer = $('<div></div>');
+    $spacer.attr('class', 'spacer');
+    $layerContainer.append($spacer);
+
     var $template = $('.layer-template.'+this.layout.maker.type).clone(false).attr('class', 'layer');
-    $layerContainer.append($template);
+    $spacer.append($template);
     $(this.layout.maker.container).html($layerContainer);
 
     this.keymap.forEach((k, i) => {

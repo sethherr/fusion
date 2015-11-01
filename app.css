@@ -3,10 +3,15 @@
 }
 
 .layer {
-	display: block;
 	position: relative;
-	margin-top: 0px;
-	margin-left: 0px;
+}
+
+.spacer {
+    display: table-cell;
+    background-color: #fcfcfc;
+    border: solid 1px #aaa;
+    border-radius: 3px;
+    padding: 5px;
 }
 
 .key {

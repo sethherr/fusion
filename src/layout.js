@@ -15,7 +15,7 @@ export class Layout {
     this.layers = [];
     layers.forEach((l, i) => {
       var l = new Layer(this, l.description, l.properties, l.keymap);
-      $("#layer-dropdown").append('<option value="'+i+'">Layer '+(i+1)+'</option>');
+      $("#layer-dropdown").append('<option value="'+i+'">Layer '+i+'</option>');
       this.layers.push(l);
     });
 
@@ -29,7 +29,7 @@ export class Layout {
 
   addLayer() {
     var l = new Layer(this);
-    $("#layer-dropdown").append('<option value="'+this.layers.length+'">Layer '+(this.layers.length+1)+'</option>');
+    $("#layer-dropdown").append('<option value="'+this.layers.length+'">Layer '+(this.layers.length)+'</option>');
     this.layers.push(l);
     return l;
   }
