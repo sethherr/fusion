@@ -1,6 +1,7 @@
 import {keyCodes} from 'keycodes';
 import {keyCategories} from 'keycodes';
 import {Layout} from 'layout';
+import {LayerView} from 'layer_view';
 
 /**
  * LayoutMaker
@@ -51,6 +52,15 @@ export class LayoutMaker {
    * starts the maker, adds the initial layer
    */
   start() {
+
+    var keys = [
+      {x:0, y: 0}, {x:1, y: 0}, {x:2, y: 0}, {x:3, y: 0}, {x:4, y: 0}, {x:5, y: 0}, {x:6, y: 0}, {x:7, y: 0}, {x:8, y: 0}, {x:9, y: 0}, {x:10, y: 0}, {x:11, y: 0},
+      {x:0, y: 1}, {x:1, y: 1}, {x:2, y: 1}, {x:3, y: 1}, {x:4, y: 1}, {x:5, y: 1}, {x:6, y: 1}, {x:7, y: 1}, {x:8, y: 1}, {x:9, y: 1}, {x:10, y: 1}, {x:11, y: 1},
+      {x:0, y: 2}, {x:1, y: 2}, {x:2, y: 2}, {x:3, y: 2}, {x:4, y: 2}, {x:5, y: 2}, {x:6, y: 2}, {x:7, y: 2}, {x:8, y: 2}, {x:9, y: 2}, {x:10, y: 2}, {x:11, y: 2},
+    ];
+
+    ReactDOM.render(<LayerView keys={keys}/>, document.getElementById('key'));
+
 
     // We only need to do this once.
     $(".keytop").each(function () {

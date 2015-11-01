@@ -16,6 +16,8 @@
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="./node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.js"></script>
+  <script src="./node_modules/react/dist/react.js"></script>
+  <script src="./node_modules/react-dom/dist/react-dom.js"></script>
   <script src="./node_modules/systemjs/dist/system.js"></script>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="./config.js"></script>
@@ -38,130 +40,14 @@
   </script>
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Fusion</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Keyboard Type <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="index.html?keyboardType=ergodox_ez">ErgoDox EZ</a></li>
-              <li><a href="index.html?keyboardType=planck">Planck</a></li>
-              <li><a href="index.html?keyboardType=preonic">Preonic</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="navbar-form navbar-left" onsubmit="return false;">
-          <button class="btn btn-default" id="load">Load</button>
-          <button class="btn btn-primary" id="save">Save</button>
-          <select class="form-control" id="layer-dropdown"></select>
-          <button class="btn btn-default add-layer">Add layer</button>
-          <button class="btn btn-default" id="menu-toggle">Toggle sidebar</button>
-        </form>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="panel panel-default" id="key-panel" style="display: none;">
-              <div class="panel-heading">Key 0</div>
-              <div class="panel-body">
-                Keycode:
-                <input class="form-control" id="key-keycode">
-                Top labels:
-                <div class="row">
-                  <div class="col-sm-4"><input class="form-control key-label key-label-tl" id="key-l-tl"></div>
-                  <!--div class="col-sm-4"><input class="form-control key-label key-label-tc" id="key-l-tc"></div>
-                  <div class="col-sm-4"><input class="form-control key-label key-label-tr" id="key-l-tr"></div>
-                </div>
-                Center labels:
-                <div class="row">
-                  <div class="col-sm-4"><input class="form-control" id="key-l-cl"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-cc"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-cr"></div>
-                </div>
-                Bottom labels:
-                <div class="row">
-                  <div class="col-sm-4"><input class="form-control" id="key-l-bl"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-bc"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-br"></div>
-                </div>
-                Front labels:
-                <div class="row">
-                  <div class="col-sm-4"><input class="form-control" id="key-l-fl"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-fc"></div>
-                  <div class="col-sm-4"><input class="form-control" id="key-l-fr"></div-->
-                </div>
-                Description:
-                <textarea class="form-control" id="key-description"></textarea>
-              </div>
-            </div>
-            <div class="panel panel-default" id="layer-panel">
-              <div class="panel-heading">Layer 0</div>
-              <div class="panel-body">
-                Description:
-                <textarea class="form-control" id="layer-description" placeholder="Describe the layer (optional)"></textarea>
-              </div>
-            </div>
-            <div class="panel panel-default" id="layout-panel">
-              <div class="panel-heading">Layout</div>
-              <div class="panel-body">
-                Description:
-                <textarea class="form-control" id="layout-description" placeholder="Describe the layout (optional)"></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="key"></div>
       </div>
     </div>
-    <!-- /#sidebar-wrapper -->
-
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="alert alert-info alert-dismissible" role="alert">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>There are two ways to set keys for your layer!</strong>
-              <ul>
-                <li>Select a key using the mouse, then use your keyboard to set a key (this only works if you don't have an input field or button selected).</li>
-                <li>Hover over a key using the mouse, then right click and select a key using the context-menu.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 keyboard-layers">
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-
   </div>
-
-
 
   <div class="layer-template ergodox_ez" style="width: 1055px; height: 415px;">
     <!-- left -->

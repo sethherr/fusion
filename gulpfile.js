@@ -1,12 +1,12 @@
 var babel = require('gulp-babel');
 var browserSync = require('browser-sync');
 var gulp = require('gulp');
-var es6Path = 'src/**.js';
+var es6Path = ['src/**.js', 'src/**.jsx'];
 var compilePath = 'dist';
 var superstatic = require( 'superstatic' );
 
 gulp.task('babel', function () {
-  gulp.src([es6Path])
+  gulp.src(es6Path)
     .pipe(babel())
     .pipe(gulp.dest(compilePath));
 });
@@ -19,7 +19,7 @@ gulp.task('serve', ['babel', 'watch'], function() {
   process.stdout.write('Starting browserSync and superstatic...\n');
   browserSync({
     port: 3000,
-    files: ['index.html', '**/*.js'],
+    files: ['index.html', es6Path],
     injectChanges: true,
     logFileChanges: false,
     logLevel: 'silent',
