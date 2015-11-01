@@ -29,8 +29,10 @@
     }
 
     System.import('layout_maker').then(function (layout_maker) {
-      var lm = new layout_maker.LayoutMaker(".keyboard-layers", getParameterByName('keyboardType')||'ergodox_ez');
-      lm.start();
+      $(function(){
+        var lm = new layout_maker.LayoutMaker(".keyboard-layers", getParameterByName('keyboardType')||'ergodox_ez');
+        lm.start();
+      });
     });
 
   </script>
