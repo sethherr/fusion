@@ -46,11 +46,8 @@ export class Layer {
     var $layerContainer = $('<div></div>').attr('class', 'layer-container');
     $('#layer-description').val(this.description);
 
-    var $spacer = $('<div></div>').attr('class', 'spacer');
-    $layerContainer.append($spacer);
-
     var $template = $('.layer-template.'+this.layout.maker.type).clone(false).attr('class', 'layer');
-    $spacer.append($template);
+    $layerContainer.append($template);
     $(this.layout.maker.container).html($layerContainer);
 
     this.keymap.forEach((k, i) => {
