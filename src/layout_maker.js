@@ -36,6 +36,15 @@ export class LayoutMaker {
     this.activeLayer = l;
     this.layout.layers[l].draw();
     $("#layer-dropdown").val(l);
+    $("#layer-panel .panel-heading").html(`Layer ${l}`);
+  }
+
+  /**
+   * toggleSidebar
+   */
+  toggleSidebar(event) {
+    event.preventDefault();
+    $("#wrapper").toggleClass("toggled");
   }
 
   /**
@@ -57,10 +66,12 @@ export class LayoutMaker {
     $('#load').on('click', this.load.bind(this));
     $('.add-layer').on('click', this.addLayer.bind(this));
     $('#layout-description').on('change', this.setLayoutDescription.bind(this));
+    $('#layer-description').on('change', this.setLayerDescription.bind(this));
     $('#layer-dropdown').on('change', this.changeLayerDropdown.bind(this));
+    $("#menu-toggle").on('click', this.toggleSidebar.bind(this));
 
     $(document).on('click', '.layer .key, .layer .key .label', this.selectKey.bind(this));
-    $(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
+    //$(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
 
     var items = {
       clear: {name: "Clear", callback: this.contextMenuKey.bind(this) },
@@ -98,14 +109,18 @@ export class LayoutMaker {
     });
   }
 
-  setLayerDescription(event) {
-    var $layerContainer = $(event.target).closest('.layer-container');
-    var layer = +$layerContainer.data('layer');
-    this.layout.layers[layer].description = $(event.target).val();
+  //setLayerDescription(event) {
+  //  var $layerContainer = $(event.target).closest('.layer-container');
+  //  var layer = +$layerContainer.data('layer');
+  //  this.layout.layers[layer].description = $(event.target).val();
+  //}
+
+  setLayoutDescription(event) {
+    this.layout.description = $(even.target).val()
   }
 
-  setLayoutDescription() {
-    this.layout.description = $(this).val()
+  setLayerDescription(event) {
+    this.layout.layers[this.activeLayer].description = $(event.target).val()
   }
 
   /**
@@ -115,6 +130,8 @@ export class LayoutMaker {
    * @param label {String} label
    */
   setKey(key, keyCode, label) {
+    $("#key-keycode").val(keyCode);
+    $("#key-l-t-l").val(label);
     this.layout.setKey(this.activeLayer, key, keyCode, label);
   }
 
@@ -148,7 +165,12 @@ export class LayoutMaker {
     if (this.selectedKey != key) {
       $this.addClass('selected');
       this.selectedKey = key;
+
+      $("#key-panel .panel-heading").html(`Key ${key}`);
+
+      $("#key-panel").show();
     } else {
+      $("#key-panel").hide();
       this.selectedKey = null;
     }
   }

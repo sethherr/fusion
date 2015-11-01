@@ -25,26 +25,26 @@ export class Layer {
    * @param k {Number} keyIndex
    */
   drawKey(k) {
-    var key = this.keymap[k];
     var $key = $('.layer .key[data-key='+k+']');
 
     if($key.length == 0) {
       return;
     }
 
-    var $text = $key.find('.l .l-t-l');
+    var key = this.keymap[k];
+    var $label = $key.find('.l.l-t-l');
     var $wrapper = $key.find('.keytop');
 
-    if ($text.length == 0) {
-      $text = $($wrapper).append('<div class="l l-t-l">'+key.label+'</div>');
+    if ($label.length == 0) {
+      $label = $($wrapper).append('<div class="l l-t-l">'+key.label+'</div>');
     } else {
-      $text.html(key.label);
+      $label.html(key.label);
     }
   }
 
   draw() {
     var $layerContainer = $('<div></div>').attr('class', 'layer-container');
-    $layerContainer.append('<input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
+    $('#layer-description').val(this.description);
 
     var $spacer = $('<div></div>').attr('class', 'spacer');
     $layerContainer.append($spacer);

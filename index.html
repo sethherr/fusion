@@ -38,7 +38,7 @@
   </script>
 </head>
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -66,43 +66,81 @@
         <form class="navbar-form navbar-left" onsubmit="return false;">
           <button class="btn btn-default" id="load">Load</button>
           <button class="btn btn-primary" id="save">Save</button>
+          <select class="form-control" id="layer-dropdown"></select>
           <button class="btn btn-default add-layer">Add layer</button>
+          <button class="btn btn-default" id="menu-toggle">Toggle sidebar</button>
         </form>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div class="container-fluid main">
-    <div class="row">
-      <div class="col-lg-12">
-        <!--div class="alert alert-info alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <strong>There are two ways to set keys for your layer!</strong>
-          <ul>
-            <li>Select a key using the mouse, then use your keyboard to set a key.</li>
-            <li>Hover over a key using the mouse, then right click and select a key using the context-menu.</li>
-          </ul>
-        </div-->
 
-        <input id="layout-description" name="layout-description" placeholder="Provide an optional description of the layout" class="form-control"><br/>
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-11">
-            <select class="form-control" id="layer-dropdown">
-            </select>
+          <div class="col-sm-12">
+            <div class="panel panel-default" id="key-panel" style="display: none;">
+              <div class="panel-heading">Key 0</div>
+              <div class="panel-body">
+                Keycode:
+                <input class="form-control" id="key-keycode">
+                Top labels:
+                <div class="row">
+                  <div class="col-sm-4"><input class="form-control" id="key-l-t-l"></div>
+                  <div class="col-sm-4"><input class="form-control" id="key-l-t-c"></div>
+                  <div class="col-sm-4"><input class="form-control" id="key-l-t-r"></div>
+                </div>
+
+                Description:
+                <textarea class="form-control" id="key-description"></textarea>
+              </div>
+            </div>
+            <div class="panel panel-default" id="layer-panel">
+              <div class="panel-heading">Layer 0</div>
+              <div class="panel-body">
+                Description:
+                <textarea class="form-control" id="layer-description"></textarea>
+              </div>
+            </div>
           </div>
-          <div class="col-lg-1">
-            <button type="button" class="btn btn-default add-layer">Add layer</button>
+        </div>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <!--div class="alert alert-info alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>There are two ways to set keys for your layer!</strong>
+              <ul>
+                <li>Select a key using the mouse, then use your keyboard to set a key.</li>
+                <li>Hover over a key using the mouse, then right click and select a key using the context-menu.</li>
+              </ul>
+            </div-->
+
+            <input id="layout-description" name="layout-description" placeholder="Provide an optional description of the layout" class="form-control"><br/>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 keyboard-layers">
           </div>
         </div>
 
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-sm-12 keyboard-layers">
-      </div>
-    </div>
+    <!-- /#page-content-wrapper -->
 
   </div>
+
+
 
   <div class="layer-template ergodox_ez" style="width: 1055px; height: 415px;">
     <div class="left-hand">
