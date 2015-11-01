@@ -17,31 +17,36 @@ export class Layer {
 
   setKey(key, keyCode, label) {
     this.keymap[key] = {code: keyCode, label: label};
+    this.drawKey(key);
+  }
 
-    var $key = $('.layer .key[data-key='+key+']');
+  /**
+   * drawKey
+   * @param k {Number} keyIndex
+   */
+  drawKey(k) {
+    var key = this.keymap[k];
+    var $key = $('.layer .key[data-key='+k+']');
 
     if($key.length == 0) {
       return;
     }
 
-    var $text = $('.layer .key[data-key='+key+'] .l');
+    var $text = $key.find('.l .l-t-l');
     var $wrapper = $key.find('.keytop');
 
     if ($text.length == 0) {
-      $text = $($wrapper).append('<div class="l l-t-l">'+label+'</div>');
+      $text = $($wrapper).append('<div class="l l-t-l">'+key.label+'</div>');
     } else {
-      $text.html(label);
+      $text.html(key.label);
     }
-
   }
 
   draw() {
-    var $layerContainer = $('<div></div>');
-    $layerContainer.attr('class', 'layer-container');
+    var $layerContainer = $('<div></div>').attr('class', 'layer-container');
     $layerContainer.append('<input name="layer-description" placeholder="Provide an optional description of the layer" class="form-control" value="'+this.description+'"><br/>');
 
-    var $spacer = $('<div></div>');
-    $spacer.attr('class', 'spacer');
+    var $spacer = $('<div></div>').attr('class', 'spacer');
     $layerContainer.append($spacer);
 
     var $template = $('.layer-template.'+this.layout.maker.type).clone(false).attr('class', 'layer');
@@ -49,12 +54,7 @@ export class Layer {
     $(this.layout.maker.container).html($layerContainer);
 
     this.keymap.forEach((k, i) => {
-      this.setKey(i, k.code, k.label);
-    });
-
-    $(".keytop").each(function () {
-      $(this).height($(this).parent().height() - 13);
-      $(this).width($(this).parent().width() - 8);
+      this.drawKey(i);
     });
   }
 

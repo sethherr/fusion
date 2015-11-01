@@ -42,6 +42,13 @@ export class LayoutMaker {
    * starts the maker, adds the initial layer
    */
   start() {
+
+    // We only need to do this once.
+    $(".keytop").each(function () {
+      $(this).height($(this).parent().height() - 13);
+      $(this).width($(this).parent().width() - 8);
+    });
+
     this.addLayer();
 
     $('body').on('keydown', this.pressedKey.bind(this));
