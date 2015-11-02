@@ -18,7 +18,7 @@ export var LayerView = React.createClass({
   render: function() {
     var keys = this.state.keys.map(function (key) {
       return (
-        <KeyView x={key.x} y={key.y} width={key.width} height={key.height} voffset={key.voffset} hoffset={key.hoffset} rotate={key.rotate}/>
+        <KeyView x={key.x} y={key.y} width={key.width} height={key.height} voffset={key.voffset} hoffset={key.hoffset} rotate={key.rotate} origin={key.origin} backgroundColor={key.backgroundColor}/>
       );
     });
     return (

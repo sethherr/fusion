@@ -54,18 +54,36 @@ export class LayoutMaker {
   start() {
 
     var keys = [
+      // LEFT
       {x:0, y: 0, width: 1.5, voffset: 0.37}, {x:1.5, y: 0, voffset: 0.37}, {x:2.5, y: 0, voffset: 0.129}, {x:3.5, y: 0}, {x:4.5, y: 0, voffset: 0.129}, {x:5.5, y: 0, voffset: 0.24}, {x:6.5, y: 0, voffset: 0.24},
       {x:0, y: 1, width: 1.5, voffset: 0.37}, {x:1.5, y: 1, voffset: 0.37}, {x:2.5, y: 1, voffset: 0.129}, {x:3.5, y: 1}, {x:4.5, y: 1, voffset: 0.129}, {x:5.5, y: 1, voffset: 0.24}, {x:6.5, y: 1, voffset: 0.24, height: 1.5},
       {x:0, y: 2, width: 1.5, voffset: 0.37}, {x:1.5, y: 2, voffset: 0.37}, {x:2.5, y: 2, voffset: 0.129}, {x:3.5, y: 2}, {x:4.5, y: 2, voffset: 0.129}, {x:5.5, y: 2, voffset: 0.24},
       {x:0, y: 3, width: 1.5, voffset: 0.37}, {x:1.5, y: 3, voffset: 0.37}, {x:2.5, y: 3, voffset: 0.129}, {x:3.5, y: 3}, {x:4.5, y: 3, voffset: 0.129}, {x:5.5, y: 3, voffset: 0.24}, {x:6.5, y: 3, voffset: -0.26, height: 1.5},
       {x:0.5, y: 4, width: 1, voffset: 0.37}, {x:1.5, y: 4, voffset: 0.37}, {x:2.5, y: 4, voffset: 0.129}, {x:3.5, y: 4}, {x:4.5, y: 4, voffset: 0.129},
+      // thumb
+      {x:7.5, y: 3, height: 1, hoffset: 0.37, voffset: 0.87, rotate: 30},
+      {x:8.5, y: 3, height: 1, hoffset: 0.24, voffset: 1.37, rotate: 30},
+      {x:8.5, y: 4, height: 1, hoffset: -0.26, voffset: 1.24, rotate: 30},
+      {x:6.5, y: 4, height: 2, voffset: 0.24, rotate: 30},
+      {x:7.5, y: 4, height: 2, hoffset: -0.13, voffset: 0.74, rotate: 30},
+      {x:8.5, y: 5, height: 1, hoffset: -0.76, voffset: 1.11, rotate: 30},
 
-      {x:7.5, y: 3, height: 1, hoffset: 0.37, voffset: 0.87, rotate: 30}, {x:8.5, y: 3, height: 1, hoffset: 0.24, voffset: 1.37, rotate: 30}, {x:8.5, y: 4, height: 1, hoffset: -0.26, voffset: 1.24, rotate: 30},
-      {x:6.5, y: 4, height: 2, voffset: 0.24, rotate: 30}, {x:7.5, y: 4, height: 2, hoffset: -0.13, voffset: 0.74, rotate: 30}, {x:8.5, y: 5, height: 1, hoffset: -0.76, voffset: 1.11, rotate: 30},
+      // RIGHT
+      {x: 12, y: 0, voffset: 0.24}, {x: 13, y: 0, voffset: 0.24}, {x: 14, y: 0, voffset: 0.129}, {x: 15, y: 0}, { x: 16, y: 0, voffset: 0.129}, {x: 17, y: 0, voffset: 0.37}, {x: 18, y: 0, width: 1.5, voffset: 0.37},
+      {x: 12, y: 1, voffset: 0.24, height: 1.5}, {x: 13, y: 1, voffset: 0.24}, {x: 14, y: 1, voffset: 0.129}, { x: 15, y: 1}, {x: 16, y: 1, voffset: 0.129}, {x: 17, y: 1, voffset: 0.37}, {x: 18, y: 1, width: 1.5, voffset: 0.37},
+      {x: 13, y: 2, voffset: 0.24}, {x: 14, y: 2, voffset: 0.129}, {x: 15, y: 2}, {x: 16, y: 2, voffset: 0.129}, { x: 17, y: 2, voffset: 0.37}, {x: 18, y: 2, width: 1.5, voffset: 0.37},
+      {x: 12, y: 3, voffset: -0.26, height: 1.5}, {x: 13, y: 3, voffset: 0.24}, {x: 14, y: 3, voffset: 0.129}, { x: 15, y: 3}, {x: 16, y: 3, voffset: 0.129}, {x: 17, y: 3, voffset: 0.37}, {x: 18, y: 3, width: 1.5, voffset: 0.37},
+      {x: 14, y: 4, voffset: 0.129}, {x: 15, y: 4}, {x: 16, y: 4, voffset: 0.129}, {x: 17, y: 4, voffset: 0.37}, { x: 18, y: 4, width: 1, voffset: 0.37},
+      // thumb
+      {x: 11, y: 3, height: 1, hoffset: -0.37, voffset: 0.87, rotate: -30, origin: 'top right'},
+      {x: 10, y: 3, height: 1, hoffset: -0.24, voffset: 1.37, rotate: -30, origin: 'top right'},
+      {x: 10, y: 4, height: 1, hoffset: 0.26, voffset: 1.24, rotate: -30, origin: 'top right'},
+      {x: 12, y: 4, height: 2, voffset: 0.24, rotate: -30, origin: 'top right'},
+      {x: 11, y: 4, height: 2, hoffset: 0.13, voffset: 0.74, rotate: -30, origin: 'top right'},
+      {x: 10, y: 5, height: 1, hoffset: 0.76, voffset: 1.11, rotate: -30, origin: 'top right'},
     ];
 
     this.rLayoutContainer = ReactDOM.render(<LayerView keys={keys}/>, document.getElementById('layout-container'));
-
 
     // We only need to do this once.
     $(".keytop").each(function () {

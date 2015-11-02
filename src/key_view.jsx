@@ -6,7 +6,8 @@ export var KeyView = React.createClass({
       'width': (this.props.width||1)*54+'px',
       'height': (this.props.height||1)*54+'px',
       'transform': 'rotate('+(this.props.rotate||0)+'deg)',
-      'transform-origin': 'top left',
+      'transformOrigin': this.props.origin||'top left',
+      'backgroundColor': this.props.backgroundColor,
     };
     return <div className="key" style={styles}><div className="keytop"></div></div>;
   }
