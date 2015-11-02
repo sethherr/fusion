@@ -54,12 +54,17 @@ export class LayoutMaker {
   start() {
 
     var keys = [
-      {x:0, y: 0, width: 1.5, voffset: 10}, {x:1.5, y: 0, voffset: 10}, {x:2.5, y: 0}, {x:3.5, y: 0}, {x:4, y: 0}, {x:5, y: 0}, {x:6, y: 0}, {x:7, y: 0}, {x:8, y: 0}, {x:9, y: 0}, {x:10, y: 0}, {x:11, y: 0},
-      {x:0, y: 1}, {x:1, y: 1}, {x:2, y: 1}, {x:3, y: 1}, {x:4, y: 1}, {x:5, y: 1}, {x:6, y: 1}, {x:7, y: 1}, {x:8, y: 1}, {x:9, y: 1}, {x:10, y: 1}, {x:11, y: 1},
-      {x:4, y: 4, rotate: 30}, {x:1, y: 2}, {x:2, y: 2}, {x:3, y: 2}, {x:4, y: 2}, {x:5, y: 2}, {x:6, y: 2}, {x:7, y: 2}, {x:8, y: 2}, {x:9, y: 2}, {x:10, y: 2}, {x:11, y: 2},
+      {x:0, y: 0, width: 1.5, voffset: 0.37}, {x:1.5, y: 0, voffset: 0.37}, {x:2.5, y: 0, voffset: 0.129}, {x:3.5, y: 0}, {x:4.5, y: 0, voffset: 0.129}, {x:5.5, y: 0, voffset: 0.24}, {x:6.5, y: 0, voffset: 0.24},
+      {x:0, y: 1, width: 1.5, voffset: 0.37}, {x:1.5, y: 1, voffset: 0.37}, {x:2.5, y: 1, voffset: 0.129}, {x:3.5, y: 1}, {x:4.5, y: 1, voffset: 0.129}, {x:5.5, y: 1, voffset: 0.24}, {x:6.5, y: 1, voffset: 0.24, height: 1.5},
+      {x:0, y: 2, width: 1.5, voffset: 0.37}, {x:1.5, y: 2, voffset: 0.37}, {x:2.5, y: 2, voffset: 0.129}, {x:3.5, y: 2}, {x:4.5, y: 2, voffset: 0.129}, {x:5.5, y: 2, voffset: 0.24},
+      {x:0, y: 3, width: 1.5, voffset: 0.37}, {x:1.5, y: 3, voffset: 0.37}, {x:2.5, y: 3, voffset: 0.129}, {x:3.5, y: 3}, {x:4.5, y: 3, voffset: 0.129}, {x:5.5, y: 3, voffset: 0.24}, {x:6.5, y: 3, voffset: -0.26, height: 1.5},
+      {x:0.5, y: 4, width: 1, voffset: 0.37}, {x:1.5, y: 4, voffset: 0.37}, {x:2.5, y: 4, voffset: 0.129}, {x:3.5, y: 4}, {x:4.5, y: 4, voffset: 0.129},
+
+      {x:7.5, y: 3, height: 1, hoffset: 0.37, voffset: 0.87, rotate: 30}, {x:8.5, y: 3, height: 1, hoffset: 0.24, voffset: 1.37, rotate: 30}, {x:8.5, y: 4, height: 1, hoffset: -0.26, voffset: 1.24, rotate: 30},
+      {x:6.5, y: 4, height: 2, voffset: 0.24, rotate: 30}, {x:7.5, y: 4, height: 2, hoffset: -0.13, voffset: 0.74, rotate: 30}, {x:8.5, y: 5, height: 1, hoffset: -0.76, voffset: 1.11, rotate: 30},
     ];
 
-    ReactDOM.render(<LayerView keys={keys}/>, document.getElementById('key'));
+    this.rLayoutContainer = ReactDOM.render(<LayerView keys={keys}/>, document.getElementById('layout-container'));
 
 
     // We only need to do this once.
@@ -80,6 +85,7 @@ export class LayoutMaker {
     $('#layer-dropdown').on('change', this.changeLayerDropdown.bind(this));
     $("#menu-toggle").on('click', this.toggleSidebar.bind(this));
     $(".key-label").on('change', this.changeKeyLabel.bind(this));
+    $("#rotate").on('click', this.rLayoutContainer.rotate);
 
     $(document).on('click', '.layer .key, .layer .key .label', this.selectKey.bind(this));
     //$(document).on('change', '.layer-container input', this.setLayerDescription.bind(this));
