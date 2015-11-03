@@ -1,3 +1,5 @@
+import {decodeHTML} from 'utils';
+
 export var KeyView = React.createClass({
   render: function() {
     var styles = {
@@ -9,6 +11,12 @@ export var KeyView = React.createClass({
       'transformOrigin': this.props.data.origin||'top left',
       'backgroundColor': this.props.data.backgroundColor,
     };
-    return <div className='key' style={styles} onClick={this.handleClick}><div className="keytop"></div></div>;
+    return (
+      <div className='key' style={styles} onClick={this.handleClick}>
+        <div className="keytop">
+          <div className="l l-tl">{decodeHTML(this.props.data.label||'')}</div>
+        </div>
+      </div>
+    );
   }
 });
