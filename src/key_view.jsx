@@ -1,7 +1,12 @@
 import {decodeHTML} from 'utils';
 
-export var KeyView = React.createClass({
-  render: function() {
+export class KeyView extends React.Component {
+  handleClick() {
+    console.log("handleClick", this.props);
+    //this.props.onSelect(this.props.key);
+  }
+
+  render() {
     var styles = {
       top: (this.props.data.voffset*54||0)+this.props.data.y*54,
       left: (this.props.data.hoffset*54||0)+this.props.data.x*54,
@@ -24,4 +29,4 @@ export var KeyView = React.createClass({
       </div>
     );
   }
-});
+}

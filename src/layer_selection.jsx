@@ -1,8 +1,8 @@
-export var LayerSelection = React.createClass({
-  handleChange: function() {
+export class LayerSelection extends React.Component {
+  handleChange() {
     this.props.onSelectLayer(this.refs.selectedLayer.value);
-  },
-  render: function() {
+  }
+  render() {
     var options = this.props.layers.map(function (layer, i) {
       return (
         <option value={i} key={i}>Layer {i}</option>
@@ -14,4 +14,4 @@ export var LayerSelection = React.createClass({
       </select>
     );
   }
-});
+}

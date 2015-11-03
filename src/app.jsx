@@ -1,20 +1,19 @@
 import {LayerView} from 'layer_view';
 import {LayerSelection} from 'layer_selection';
 
-export var App = React.createClass({
-  getInitialState: function() {
-    return {
-      selectedLayer: 0
-    };
-  },
+export class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {selectedLayer: 0};
+  }
 
-  selectLayer: function(layer) {
+  selectLayer(layer) {
     this.setState({
       selectedLayer: layer
     });
-  },
+  }
 
-  render: function() {
+  render() {
     var keymap = this.props.layout.layers[this.state.selectedLayer].keymap;
     return (
       <div>
@@ -23,4 +22,4 @@ export var App = React.createClass({
       </div>
     );
   }
-});
+}
