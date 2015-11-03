@@ -11,7 +11,7 @@ export var LayerView = React.createClass({
       var data = key;
       data.label = self.props.keymap[i].label;
       return (
-        <KeyView data={data} key={i}/>
+        <KeyView data={data} key={i} keyIndex={i} selectedKey={self.props.selectedKey} onSelectKey={self.props.onSelectKey}/>
       );
     });
     return (

@@ -1,12 +1,11 @@
 import {decodeHTML} from 'utils';
 
-export class KeyView extends React.Component {
-  handleClick() {
-    console.log("handleClick", this.props);
-    //this.props.onSelect(this.props.key);
-  }
+export var KeyView = React.createClass({
+  handleClick: function() {
+    this.props.onSelectKey(this.props.keyIndex);
+  },
 
-  render() {
+  render: function() {
     var styles = {
       top: (this.props.data.voffset*54||0)+this.props.data.y*54,
       left: (this.props.data.hoffset*54||0)+this.props.data.x*54,
@@ -20,13 +19,17 @@ export class KeyView extends React.Component {
       height: styles.height - 13,
       width: styles.width - 8
     };
+    var classNames = ['key'];
+    if(this.props.keyIndex == this.props.selectedKey) {
+      classNames.push('selected')
+    }
 
     return (
-      <div className='key' style={styles} onClick={this.handleClick}>
+      <div className={classNames.join(' ')} style={styles} onClick={this.handleClick}>
         <div className="keytop" style={keyTopStyles}>
           <div className="l l-tl">{decodeHTML(this.props.data.label||'')}</div>
         </div>
       </div>
     );
   }
-}
+});
