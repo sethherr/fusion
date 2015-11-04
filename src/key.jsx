@@ -1,8 +1,12 @@
 import {decodeHTML} from 'utils';
 
-export var KeyView = React.createClass({
+export var Key = React.createClass({
   handleClick: function() {
     this.props.onSelectKey(this.props.keyIndex);
+  },
+
+  contextMenu: function() {
+    console.log("context-menu");
   },
 
   render: function() {
@@ -25,7 +29,7 @@ export var KeyView = React.createClass({
     }
 
     return (
-      <div className={classNames.join(' ')} style={styles} onClick={this.handleClick}>
+      <div className={classNames.join(' ')} style={styles} onClick={this.handleClick} onContextMenu={this.contextMenu}>
         <div className="keytop" style={keyTopStyles}>
           <div className="l l-tl">{decodeHTML(this.props.data.label||'')}</div>
         </div>

@@ -9,6 +9,8 @@
  * JS keycodes: http://www.cambiaresearch.com/articles/15/javascript-char-codes-key-codes
  * Decode Unicode: http://www.decodeunicode.org/en/
  * List of Unicode characters: https://en.wikipedia.org/wiki/List_of_Unicode_characters
+ * http://unicode-table.com/en/search/
+ * https://thenounproject.com/search/
  */
 export const keyCodes = {
   500: ["", "KC_NO", "other"],

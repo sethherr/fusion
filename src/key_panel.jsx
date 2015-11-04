@@ -14,7 +14,7 @@ export var KeyPanel = React.createClass({
           <input type="text" className="form-control" ref="ltl" value={this.props.keyInfo.label} onChange={this.handleChange}/>
 
           Description:
-          <textarea className="form-control" ref="description" onChange={this.handleChange} value={this.props.keyInfo.description||''}></textarea>
+          <textarea className="form-control" ref="description" onChange={this.handleChange} value={this.props.keyInfo.description}></textarea>
         </div>
       </div>
     );

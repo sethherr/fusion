@@ -30,10 +30,10 @@
       return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
-    System.import('layout_maker').then(function (layout_maker) {
+    System.import('fusion').then(function (_) {
       $(function(){
-        var lm = new layout_maker.LayoutMaker(".keyboard-layers", getParameterByName('keyboardType')||'ergodox_ez');
-        lm.start();
+        var fusion = new _.Fusion("app", getParameterByName('keyboardType')||'ergodox_ez');
+        fusion.start();
       });
     });
 

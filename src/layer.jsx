@@ -1,6 +1,6 @@
-import {KeyView} from 'key_view';
+import {Key} from 'key';
 
-export var LayerView = React.createClass({
+export var Layer = React.createClass({
   render: function() {
     var self = this;
     var styles = {
@@ -12,7 +12,7 @@ export var LayerView = React.createClass({
       var data = key;
       data.label = self.props.keymap[i] ? self.props.keymap[i].label : '';
       return (
-        <KeyView data={data} key={i} keyIndex={i} selectedKey={self.props.selectedKey} onSelectKey={self.props.onSelectKey}/>
+        <Key data={data} key={i} keyIndex={i} selectedKey={self.props.selectedKey} onSelectKey={self.props.onSelectKey}/>
       );
     });
     return (
