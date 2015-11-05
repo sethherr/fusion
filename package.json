@@ -4,10 +4,8 @@
   "description": "keyboard-layout maker",
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "d3": "^3.5.6",
-    "jquery-contextmenu": "^1.9.1",
-    "react": "^0.14.1",
-    "react-dom": "^0.14.1",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
     "systemjs": "^0.18.4"
   },
   "devDependencies": {

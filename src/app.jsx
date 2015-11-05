@@ -9,42 +9,6 @@ import {keyCategories} from 'keycodes';
 
 export var App = React.createClass({
   getInitialState: function() {
-
-    var items = {
-      clear: {name: "Clear", callback: this.contextMenuKey },
-      separator1: "-----"
-    };
-
-    for (var cat in keyCategories) {
-      if (keyCategories.hasOwnProperty(cat)) {
-        if(keyCategories[cat] == '-----') {
-          var catMenu = "-----";
-        } else {
-          // Category main menu
-          var catMenu = {name: keyCategories[cat], items: {} };
-          for (var keyCode in keyCodes) {
-            if (keyCodes.hasOwnProperty(keyCode)) {
-              if (keyCodes[keyCode][2] == cat) {
-                // Category - key option
-                var name = keyCodes[keyCode][0] || keyCodes[keyCode][1];
-                catMenu.items['set|'+keyCodes[keyCode][1]+'|'+keyCodes[keyCode][0]] = {
-                  name: name,
-                  callback: this.contextMenuKey
-                };
-              }
-            }
-          }
-        }
-        items['cat'+cat] = catMenu;
-      }
-    }
-
-    // Start context menu on all keys
-    //$.contextMenu({
-    //  selector: ".key",
-    //  items: items
-    //});
-
     return {
       layout: this.props.layout,
       selectedLayer: 0,
@@ -66,24 +30,6 @@ export var App = React.createClass({
   addLayer: function() {
     this.state.layout.layers.push({description: 'Untitled', keymap: []});
     this.setState(this.state);
-  },
-
-  // FIXME: Remove
-  contextMenuKey(optionKey, option) {
-    return;
-    console.log(option.$trigger[0]);
-    var $this = $(option.$trigger);
-    var key = $this.data('key');
-    console.log("ReactDOM.findDOMNode(this)", ReactDOM.findDOMNode(option.$trigger[0]));
-
-    var what = optionKey.split('|');
-    if(what[0] == 'clear') {
-      //this.setKey(key, '', '');
-      console.log("clear");
-    } else if(what[0] == 'set') {
-      console.log(key, what[1], what[2]);
-      //this.setKey(key, what[1], what[2]);
-    }
   },
 
   selectLayer: function(layer) {
