@@ -71,7 +71,7 @@ export var App = React.createClass({
       <div>
         <button onClick={this.addLayer}>Add layer</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
-        <Layer keys={this.props.keys} keymap={keymap} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
+        <Layer type={this.props.layout.type} keymap={keymap} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
         <div className="row">
           <div className="col-sm-4">
             <LayerPanel layer={this.state.layout.layers[selectedLayer]} selectedLayer={selectedLayer} onLayerInfoChange={this.layerInfoChange}/>
