@@ -52,6 +52,17 @@ export var App = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    $(document.body).on('keydown', this.handleKeyUpDown);
+    $(document.body).on('keyup', this.handleKeyUpDown);
+  },
+
+  componentWillUnmount: function() {
+    $(document.body).off('keydown', this.handleKeyUpDown);
+    $(document.body).off('keyup', this.handleKeyUpDown);
+  },
+
+
   addLayer: function() {
     this.state.layout.layers.push({description: 'Untitled', keymap: []});
     this.setState(this.state);
@@ -130,5 +141,27 @@ export var App = React.createClass({
         </div>
       </div>
     );
+  },
+
+  handleKeyUpDown: function() {
+    var focussedElement = $("*:focus");
+
+    if(this.state.selectedKey != null && focussedElement.length == 0) {
+      if (!keyCodes[event.keyCode]) {
+        console.log("Key not recognised, please report.");
+        console.log(e);
+        return;
+      }
+
+      if (!this.state.layout.layers[this.state.selectedLayer].keymap[this.state.selectedKey]) {
+        this.state.layout.layers[this.state.selectedLayer].keymap[this.state.selectedKey] = {};
+      }
+      this.state.layout.layers[this.state.selectedLayer].keymap[this.state.selectedKey].code = keyCodes[event.keyCode][1];
+      this.state.layout.layers[this.state.selectedLayer].keymap[this.state.selectedKey].label = keyCodes[event.keyCode][0];
+      this.setState(this.state);
+
+      event.preventDefault();
+      return false;
+    }
   }
 });
