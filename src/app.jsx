@@ -70,6 +70,8 @@ export var App = React.createClass({
     return (
       <div>
         <button onClick={this.addLayer}>Add layer</button>
+        <button onClick={this.load}>Load</button>
+        <button onClick={this.save}>Save</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
         <Layer type={this.props.layout.type} keymap={keymap} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
         <div className="row">
@@ -109,5 +111,24 @@ export var App = React.createClass({
       event.preventDefault();
       return false;
     }
+  },
+
+  /**
+   * the user wants to save the layout
+   */
+  save: function() {
+    console.log(JSON.stringify(this.state.layout, null, "  "));
+    alert("Check browser console for JSON output");
+  },
+
+  load: function() {
+    var self = this;
+    var fileName = "keymap_ergodox_ez.json";
+    $.getJSON(fileName).success(function(data) {
+      self.state.layout = data;
+      self.setState(self.state);
+    }).fail(function() {
+      console.log("woops");
+    });
   }
 });
