@@ -9,7 +9,7 @@ import {keyCodes} from 'keycodes';
 export var App = React.createClass({
   getInitialState: function() {
     return {
-      layout: this.props.layout||{"type": "ergodox_ez","description": "Untitled","properties": {},"layers": [{"description": "Untitled","properties": {},"keymap": []}]},
+      layout: this.props.layout||{"kind": "ergodox_ez","description": "Untitled","properties": {},"layers": [{"description": "Untitled","properties": {},"keymap": []}]},
       selectedLayer: 0,
       selectedKey: null,
     };
@@ -72,7 +72,7 @@ export var App = React.createClass({
         <button onClick={this.load}>Load</button>
         <button onClick={this.save}>Save</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
-        <Layer type={this.state.layout.type} keymap={keymap} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
+        <Layer kind={this.state.layout.kind} keymap={keymap} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
         <div className="row">
           <div className="col-sm-4">
             <LayerPanel layer={this.state.layout.layers[selectedLayer]} selectedLayer={selectedLayer} onLayerInfoChange={this.layerInfoChange}/>
