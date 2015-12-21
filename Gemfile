@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'rake'
+
 gem 'acts_as_list'
 
 gem 'react-rails', '~> 1.4.0'
@@ -30,10 +32,16 @@ gem 'react-rails', '~> 1.4.0'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass'
 
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Rspec, file watching testing with guard
+  gem 'rspec-rails', '~> 3.3.3'
+  gem 'guard' 
+  gem 'guard-rspec'
+  gem 'guard-rubocop'
+  gem 'factory_girl_rails', '~> 4.2.1'
+  gem 'shoulda-matchers', '~> 2.8.0'
 end
 
 group :development do
