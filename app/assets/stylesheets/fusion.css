@@ -1,0 +1,132 @@
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.layer-template {
+    display: none;
+}
+
+.layer {
+    position: relative;
+}
+
+.key {
+    border: 1px solid black;
+    width: 54px;
+    height: 54px;
+    position: absolute;
+    border-radius: 5px;
+    background-color: #cccccc;
+    padding: 0;
+    margin: 0;
+}
+
+.key:hover {
+    border: 1px solid deepskyblue;
+}
+
+.key.selected {
+    border: 1px solid red;
+}
+
+.keytop {
+    background-color: #fcfcfc;
+    border: solid 1px #aaa;
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 8px;
+}
+
+.l {
+    font-family: "Helvetica";
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    color: #000;
+    font-weight: normal;
+    padding: 0px;
+}
+
+.l-tl {
+    top: 2px;
+    left: 2px;
+    text-align: left;
+}
+
+.l-tc {
+    top: 2px;
+    left: calc(50% - 26px);
+    width: 52px;
+    text-align: center;
+}
+
+.l-tr {
+    top: 2px;
+    right: 2px;
+    text-align: right;
+}
+
+.l-cl {
+    top: calc(50% - 6px);
+    left: 2px;
+    text-align: left;
+}
+
+.l-cc {
+    top: calc(50% - 6px);
+    left: calc(50% - 26px);
+    width: 52px;
+    text-align: center;
+}
+
+.l-cr {
+    top: calc(50% - 6px);
+    right: 2px;
+    text-align: right;
+}
+
+.l-bl {
+    bottom: 2px;
+    left: 2px;
+    text-align: left;
+}
+
+.l-bc {
+    bottom: 2px;
+    left: calc(50% - 26px);
+    width: 52px;
+    text-align: center;
+}
+
+.l-br {
+    bottom: 2px;
+    right: 2px;
+    text-align: right;
+}
+
+.l-fl {
+    bottom: -11px;
+    left: 2px;
+    text-align: left;
+}
+
+.l-fc {
+    bottom: -11px;
+    left: calc(50% - 26px);
+    width: 52px;
+    text-align: center;
+}
+
+.l-fr {
+    bottom: -11px;
+    right: 2px;
+    text-align: right;
+}
