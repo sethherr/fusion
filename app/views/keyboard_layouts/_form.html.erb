@@ -1,0 +1,8 @@
+<% if false %>
+  <%= form_tag(keyboard_layout_url(1), method: "put") do %>
+      <%= react_component('App') %>
+      <%= hidden_field_tag(:layout) %>
+  <% end %>
+<% else %>
+    <%= react_component('App') %>
+<% end %>

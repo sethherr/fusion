@@ -8,26 +8,24 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
   let(:invalid_attributes) { }
 
   describe 'index' do
-    it 'can view the index' do
+    it 'redirects to new' do
       get :index
-      expect(response.code).to eq('200')
-      expect(response).to render_template :index
+      expect(response).to redirect_to new_keyboard_layout_url
     end
   end
 
   describe 'edit' do
-    it 'can edit a survey' do
-      get :edit, id: survey.id
+    it 'can edit a keyboard' do
+      get :edit, id: keyboard.id
       expect(response.code).to eq('200')
       expect(response).to render_template :edit
     end
   end
 
   describe 'show' do
-    it 'can view a survey' do
-      get :show, id: survey.id
-      expect(response.code).to eq('200')
-      expect(response).to render_template :show
+    it 'can view a keyboard' do
+      get :show, id: keyboard.id
+      expect(response).to redirect_to edit_keyboard_layout_url(keyboard)
     end
   end
 
@@ -39,4 +37,3 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
     end
   end
 end
-
