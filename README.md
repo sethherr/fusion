@@ -19,6 +19,8 @@ Reactor uses the awesome [qmk_firmware](http://github.com/jackhumbert/qmk_firmwa
 ## Demo
 You can play around on the (outdated) [Demo environment](http://rocketcode.nl/fusion/)
 
+There is a current demo available on Heroku: [fusion-keyboard.herokuapp.com/](http://fusion-keyboard.herokuapp.com)
+
 ## Quick Start
 
     bundle install
