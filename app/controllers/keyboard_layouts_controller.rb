@@ -1,6 +1,6 @@
 class KeyboardLayoutsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :find_keyboard, only: [:edit, :update]
+  before_action :find_layout, only: [:edit, :update]
 
   def index
     redirect_to new_keyboard_layout_url
@@ -16,17 +16,21 @@ class KeyboardLayoutsController < ApplicationController
     redirect_to edit_keyboard_layout_url
   end
 
+  def create
+    @layout.update!(layout_params)
+    render json: @layout
+  end
+
   def update
-    layout = Layout.find(params[:id])
     Rails.logger.debug "layout: #{layout_params}"
-    layout.update!(layout_params)
-    render json: {}
+    @layout.update!(layout_params)
+    render json: @layout
   end
 
   private
 
-  def find_keyboard
-    @keyboard = Keyboard.find(params[:id])
+  def find_layout
+    @layout = Layout.find(params[:id])
   end
 
   def key_params
@@ -39,6 +43,7 @@ class KeyboardLayoutsController < ApplicationController
 
   def layout_params
     permitted = [layers: [layer_params]]
+    pp permitted
 
     params.require(:layout).permit(permitted).tap do |whitelisted|
       whitelisted[:layers_attributes] = whitelisted.delete(:layers)

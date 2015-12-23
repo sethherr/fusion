@@ -119,8 +119,8 @@ var App = React.createClass({
       $layout.closest('form').submit();
     } else {
       $.ajax({
-        type: window.keyboard_layout_form_method,
-        url: window.keyboard_layout_form_url,
+        type: "PUT",
+        url: window.location.pathname,
         data: jsn,
         contentType: 'application/json',
         dataType: 'json'

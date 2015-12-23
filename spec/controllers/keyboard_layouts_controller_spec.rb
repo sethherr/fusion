@@ -1,9 +1,30 @@
 require 'spec_helper'
 
 RSpec.describe KeyboardLayoutsController, type: :controller do
-  let(:keyboard) { FactoryGirl.create(:keyboard) }
+  let(:subject) { FactoryGirl.create(:layout) }
 
-  let(:valid_attributes) { }
+  let(:valid_attributes) do
+    {
+      'layout': {
+        'kind': 'ergodox_ez',
+        'description': 'Untitled',
+        'properties': {},
+        'layers': [
+          {
+            'description': 'Cool layer',
+            'properties': {},
+            'keys': [
+              {
+                'code': 'KC_D',
+                'label': 'D',
+                'position': 23
+              }
+            ]
+          }
+        ]
+      }
+    }
+  end
 
   let(:invalid_attributes) { }
 
@@ -15,17 +36,17 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
   end
 
   describe 'edit' do
-    it 'can edit a keyboard' do
-      get :edit, id: keyboard.id
+    it 'can edit a layout' do
+      get :edit, id: subject.id
       expect(response.code).to eq('200')
       expect(response).to render_template :edit
     end
   end
 
   describe 'show' do
-    it 'can view a keyboard' do
-      get :show, id: keyboard.id
-      expect(response).to redirect_to edit_keyboard_layout_url(keyboard)
+    it 'redirects to edit' do
+      get :show, id: subject.id
+      expect(response).to redirect_to edit_keyboard_layout_url(layout)
     end
   end
 
@@ -34,6 +55,15 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
       get :new
       expect(response.code).to eq('200')
       expect(response).to render_template :new
+    end
+  end
+
+  describe 'update' do
+    it 'updates a given layout' do
+      post :create, valid_attributes
+      result = JSON.parse response.body
+      pp result
+      fail
     end
   end
 end
