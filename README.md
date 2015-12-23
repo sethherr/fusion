@@ -22,7 +22,11 @@ You can play around on the (outdated) [Demo environment](http://rocketcode.nl/fu
 ## Quick Start
 
     bundle install
+    rake db:create db:migrate db:seed
     rails s
+
+**Testing**: `be guard` - runs tests as files change.
+
 
 ## License
 
