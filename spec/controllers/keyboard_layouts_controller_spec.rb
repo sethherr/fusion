@@ -93,6 +93,31 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
   end
 
   describe 'update' do
-    it 'updates and maintains the same number of keys and layers'
+    it 'updates' do
+      expect(subject.present?).to be_truthy
+      expect do
+        put :update, id: subject.id, layout: valid_attributes['layout']
+      end.to change(Layout, :count).by(0)
+
+      subject.reload
+      expect(subject.description).to eq('Untitled')
+      expect(subject.kind).to eq('ErgoDox EZ')
+      expect(subject.layers.count).to eq 1
+      expect(subject.layers.first.keys.count).to eq 1
+      layer = subject.layers.first
+      expect(layer.description).to eq 'Cool layer'
+      key = layer.keys.first
+      expect(key.code).to eq('KC_D')
+      expect(key.label).to eq('D')
+      expect(key.position).to eq(23)
+    end
+
+    it 'maintains the same number of ;ayers' do
+      FactoryGirl.create(:layer, layout: subject)
+      expect(subject.layers.count).to eq 1
+      put :update, id: subject.id, layout: valid_attributes['layout']
+      subject.reload
+      expect(subject.layers.count).to eq 1
+    end
   end
 end
