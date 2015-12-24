@@ -17,13 +17,14 @@ class KeyboardLayoutsController < ApplicationController
   end
 
   def create
-    @layout.update!(layout_params)
+    @layout = Layout.create!(layout_params)
+    @layout.update!(layers_params)
     render json: @layout
   end
 
   def update
-    Rails.logger.debug "layout: #{layout_params}"
-    @layout.update!(layout_params)
+    @layout.layers.destroy_all
+    @layout.update!(layout_params.merge(layers_params))
     render json: @layout
   end
 
@@ -41,16 +42,25 @@ class KeyboardLayoutsController < ApplicationController
     [:description, keys: [key_params]]
   end
 
-  def layout_params
-    permitted = [layers: [layer_params]]
-    pp permitted
+  def permitted_layout_params
+    params.require(:layout)
+      .permit(:description, :kind, :name, layers: layer_params)
+  end
 
-    params.require(:layout).permit(permitted).tap do |whitelisted|
-      whitelisted[:layers_attributes] = whitelisted.delete(:layers)
-      whitelisted[:layers_attributes] = whitelisted[:layers_attributes].map do |l|
-        l[:keys_attributes] = l.delete(:keys)
-        l
-      end
+  def remapped_layer_key_params
+    # rename `keys` to `keys_attributes` for correct assignment
+    permitted_layout_params[:layers].map do |layer|
+      layer[:keys_attributes] = layer.delete(:keys)
+      layer
     end
+  end
+
+  def layout_params
+    permitted_layout_params.except(:layers)
+  end
+
+  def layers_params
+    # rename `layers` to `layers_attributes` for correct assignment
+    { layers_attributes: remapped_layer_key_params }
   end
 end
