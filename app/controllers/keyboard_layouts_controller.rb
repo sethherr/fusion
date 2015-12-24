@@ -1,12 +1,21 @@
 class KeyboardLayoutsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :find_keyboard, only: [:edit, :update]
 
   def index
-    redirect_to edit_keyboard_layout_url(1)
+    redirect_to new_keyboard_layout_url
   end
+
+  def new
+  end
+
+  def edit
+  end
+
   def show
-    render :edit
+    redirect_to edit_keyboard_layout_url
   end
+
   def update
     layout = Layout.find(params[:id])
     Rails.logger.debug "layout: #{layout_params}"
@@ -15,6 +24,10 @@ class KeyboardLayoutsController < ApplicationController
   end
 
   private
+
+  def find_keyboard
+    @keyboard = Keyboard.find(params[:id])
+  end
 
   def key_params
     [:label, :code, :position]

@@ -24,7 +24,11 @@ There is a current demo available on Heroku: [fusion-keyboard.herokuapp.com/](ht
 ## Quick Start
 
     bundle install
+    rake db:create db:migrate db:seed
     rails s
+
+**Testing**: `be guard` - runs tests as files change.
+
 
 ## License
 
