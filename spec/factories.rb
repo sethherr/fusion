@@ -2,15 +2,17 @@ FactoryGirl.define do
   factory :key do
   end
 
+  factory :layer do
+    sequence(:description) { |n| "layer #{n}" }
+    layout
+  end
+
   factory :layout do
-    keyboard
+    sequence(:name) { |n| "keyboard #{n}" }
   end
 
   factory :keyboard do
     sequence(:name) { |n| "keyboard #{n}" }
     key_count 104
-    factory :keyboard_ergodox do
-      key_count 76
-    end
   end
 end

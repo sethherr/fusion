@@ -119,13 +119,16 @@ var App = React.createClass({
       $layout.closest('form').submit();
     } else {
       $.ajax({
-        type: "PUT",
-        url: window.location.pathname,
+        type: window.keyboard_layout_form_method,
+        url: window.keyboard_layout_form_url,
         data: jsn,
         contentType: 'application/json',
         dataType: 'json'
-      }).done(function() {
-        alert( "Saved" );
+      }).done(function(data) {
+        console.log(data);
+        // alert( "Saved" );
+        window.keyboard_layout_form_url = window.keyboard_layout_base_url + "/" + data.layout.id;
+        window.keyboard_layout_form_method = 'PUT';
       }).fail(function() {
         alert( "Error, please try again." );
       });
