@@ -107,6 +107,10 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.3)
+    keyboard_reactor (0.0.3)
+      liquid (~> 3.0, >= 3.0.6)
+      multi_json (~> 1.11, >= 1.11.2)
+    liquid (3.0.6)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -119,6 +123,7 @@ GEM
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
+    multi_json (1.11.2)
     nenv (0.2.0)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
@@ -256,6 +261,7 @@ DEPENDENCIES
   guard-rubocop
   jquery-rails
   jquery-turbolinks
+  keyboard_reactor
   pg
   rails (= 4.2.4)
   rake

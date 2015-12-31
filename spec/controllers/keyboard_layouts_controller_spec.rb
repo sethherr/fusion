@@ -62,6 +62,15 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
     end
   end
 
+  describe 'download' do
+    it 'calls KeyboardReactor with with passed JSON' do
+      # expect_any_instance_of(KeyboardReactor::Output).to receive(:hex)
+      expect_any_instance_of(KeyboardReactor::Output).to receive(:default_hex) { 'ooggidy' }
+      get :download, valid_attributes
+      expect(response.code).to eq('200')
+    end
+  end
+
   describe 'create' do
     it 'creates a given layout with the attributes we require' do
       expect do
