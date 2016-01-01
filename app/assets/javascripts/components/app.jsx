@@ -1,7 +1,18 @@
 var App = React.createClass({
   getInitialState: function() {
     return {
-      layout: this.props.layout||{"kind": "ergodox_ez","description": "Untitled","properties": {},"layers": [{"description": "Untitled","properties": {},"keys": []}]},
+      layout: this.props.layout || {
+        "kind": "ergodox_ez",
+        "description": "Untitled",
+        "properties": {},
+        "layers": [
+          {
+            "description": "Untitled",
+            "properties": {},
+            "keys": []
+          }
+        ]
+      },
       selectedLayer: 0,
       selectedKey: null,
     };
