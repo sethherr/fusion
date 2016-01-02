@@ -17,8 +17,35 @@ describe KeyMap do
   end
 
   describe 'spreadsheet_path' do
-    it 'returns a string' do
+    it 'returns a path' do
       expect(KeyMap.spreadsheet_path).to eq Rails.root.join('lib', 'key_map', 'key_map.csv')
+    end
+  end
+
+  describe 'windows' do
+    it 'makes an array' do
+      expect(KeyMap.windows.count).to be >= 275
+      expect(KeyMap.windows.first).to eq(KeyMap.windows_hash_map(KeyMap.array.first))
+    end
+  end
+
+  describe 'mac' do
+    it 'makes an array' do
+      expect(KeyMap.mac.count).to be >= 275
+      expect(KeyMap.mac.first).to eq(KeyMap.mac_hash_map(KeyMap.array.first))
+    end
+  end
+
+  describe 'keycodesjs' do
+    it 'makes a hash' do
+      expect(KeyMap.keycodesjs.keys.count).to be >= 275
+      expect(KeyMap.keycodesjs[500]).to eq(['', 'KC_NO', 'other'])
+    end
+  end
+
+  describe 'keycodesjs_categories' do
+    it 'returns an inverted categories hash' do
+      expect(KeyMap.keycodesjs_categories['mods']).to eq 'Modifiers'
     end
   end
 

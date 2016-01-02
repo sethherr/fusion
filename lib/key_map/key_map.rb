@@ -14,6 +14,22 @@ class KeyMap
       Rails.root.join('lib', 'key_map', 'key_map.csv')
     end
 
+    def mac
+      array.map { |r| mac_hash_map(r) }
+    end
+
+    def windows
+      array.map { |r| windows_hash_map(r) }
+    end
+
+    def keycodesjs
+      Hash[array.map { |r| keycodesjs_array_map(r) }]
+    end
+
+    def keycodesjs_categories
+      categories_map.invert
+    end
+
     def mac_hash_map(key_hash)
       {
         value: key_hash['c definition'],
@@ -43,12 +59,17 @@ class KeyMap
       }
     end
 
+    def keycodesjs_array_map(key_hash)
+      h = keycodesjs_hash_map(key_hash)
+      [h[:keycode], [h[:label], h[:value], h[:category]]]
+    end
+
     def categories_map
-      {
-        'Toggle layer' => 'toggle',
+      { 'Toggle layer' => 'toggle',
         'Mometary layer switch' => 'momentary',
         'Layer switch' => 'layer',
         'Alphabet' => 'az',
+        '-----' => 'sep1',
         'Numeric' => '09',
         'Function keys' => 'f1',
         'Numpad' => 'num',
@@ -62,8 +83,7 @@ class KeyMap
         'Mouse' => 'mouse',
         'Mouse wheel' => 'mousewheel',
         'Mouse acceleration' => 'mouseaccel',
-        'Other' => 'other'
-      }
+        'Other' => 'other' }
     end
   end
 end

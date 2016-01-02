@@ -3,6 +3,7 @@ class KeyboardLayoutsController < ApplicationController
   before_action :find_layout, only: [:edit, :update]
 
   def index
+    redirect_to new_keyboard_layout_url
   end
 
   def new
