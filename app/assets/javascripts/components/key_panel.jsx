@@ -10,8 +10,6 @@ var KeyPanel = React.createClass({
   },
 
   render: function () {
-
-    // FIXME: Extract to KeyCodeSelect
     var optgroups = [];
     for (var cat in keyCategories) {
       if (keyCategories.hasOwnProperty(cat)) {
@@ -34,15 +32,18 @@ var KeyPanel = React.createClass({
       <div className="panel panel-default">
         <div className="panel-heading">Key {this.props.selectedKey}</div>
         <div className="panel-body">
-          Keycode:
-          <select className='form-control' ref="code" value={this.props.keyInfo.code} onChange={this.handleChange}>
-            {optgroups}
-          </select>
-          Label:
-          <input type="text" className="form-control" ref="ltl" value={this.props.keyInfo.label} onChange={this.handleChange}/>
-
-          Description:
-          <textarea className="form-control" ref="description" onChange={this.handleChange} value={this.props.keyInfo.description}></textarea>
+          <div className="form-group">
+            <label htmlFor="key_code">Keycode:</label>
+            <select id="key_code" className='form-control' ref='code' value={this.props.value} onChange={this.props.onKeyInfoChange}>
+              {optgroups}
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="key_label">Label:</label>
+            <input id="key_label" type="text" className="form-control" ref="ltl" value={this.props.keyInfo.label} onChange={this.handleChange}/>
+          </div>
+          <label htmlFor="key_description">Description:</label>
+          <textarea id="key_description" className="form-control" ref="description" onChange={this.handleChange} value={this.props.keyInfo.description}></textarea>
         </div>
       </div>
     );

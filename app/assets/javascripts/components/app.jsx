@@ -77,7 +77,7 @@ var App = React.createClass({
         <button onClick={this.addLayer}>Add layer</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
         <Layer kind={this.state.layout.kind} keys={keys} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
-        <div className="row">
+        <div className="row keyboard-form-panels">
           <div className="col-sm-4">
             <LayerPanel layer={this.state.layout.layers[selectedLayer]} selectedLayer={selectedLayer} onLayerInfoChange={this.layerInfoChange}/>
           </div>
