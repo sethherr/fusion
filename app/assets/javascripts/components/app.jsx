@@ -62,8 +62,9 @@ var App = React.createClass({
     //<button onClick={this.load}>Load</button>
     return (
       <div>
-        <button onClick={this.save}>Save</button>
-        <button onClick={this.addLayer}>Add layer</button>
+        <button className="btn btn-primary" onClick={this.save}>Save</button>
+        <button className="btn btn-default" onClick={this.addLayer}>Add layer</button>
+        <button className="btn btn-success" onClick={this.download}>Download (currently only downloads default configuration)</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
         <Layer kind={this.state.layout.kind} keys={keys} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
         <div className="row">
@@ -134,7 +135,10 @@ var App = React.createClass({
       });
     }
   },
-
+  download: function() {
+    var jsn = jQuery.param({ layout: this.state.layout });
+    window.open("/keyboard_layouts/download?" + jsn);
+  },
   load: function() {
     var self = this;
     var fileName = "keymap_ergodox_ez.json";

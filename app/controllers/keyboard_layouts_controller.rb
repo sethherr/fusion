@@ -28,6 +28,17 @@ class KeyboardLayoutsController < ApplicationController
     render json: @layout
   end
 
+  def download
+    reactor = KeyboardReactor::Output.new(keyboard_hash: raw_permitted_layout_params)
+    # For now reactor returns the default hex, to ensure we can correctly compile a hex
+    # Once the reactor is fixed, this will work.
+    reactor.keyboard_type = 'ergodox_ez' # Remove this line once reactor is working
+    send_data reactor.hex,
+              disposition: 'attachment',
+              filename: "#{reactor.keyboard_type}.hex",
+              type: 'application/octet-stream'
+  end
+
   private
 
   def find_layout
@@ -42,21 +53,21 @@ class KeyboardLayoutsController < ApplicationController
     [:description, keys: [key_params]]
   end
 
-  def permitted_layout_params
+  def raw_permitted_layout_params
     params.require(:layout)
       .permit(:description, :kind, :name, layers: layer_params)
   end
 
   def remapped_layer_key_params
     # rename `keys` to `keys_attributes` for correct assignment
-    permitted_layout_params[:layers].map do |layer|
+    raw_permitted_layout_params[:layers].map do |layer|
       layer[:keys_attributes] = layer.delete(:keys)
       layer
     end
   end
 
   def layout_params
-    permitted_layout_params.except(:layers)
+    raw_permitted_layout_params.except(:layers)
   end
 
   def layers_params
