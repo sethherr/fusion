@@ -16,10 +16,20 @@ It will take the JSON's exported by the Fusion project and process them in to re
 
 Reactor uses the awesome [qmk_firmware](http://github.com/jackhumbert/qmk_firmware) by Jack Humbert.
 
+## Keycodes/keymap
+
+You can view the keycodes and their respective symbols at [lib/key_map/key_map.csv](lib/key_map/key_map.csv).
+
+See something you'd like changed? Submit a pull-request.
+
+
+
 ## Demo
 You can play around on the (outdated) [Demo environment](http://rocketcode.nl/fusion/)
 
 There is a current demo available on Heroku: [fusion-keyboard.herokuapp.com/](http://fusion-keyboard.herokuapp.com)
+
+
 
 ## Quick Start
 
