@@ -1,7 +1,18 @@
 var App = React.createClass({
   getInitialState: function() {
     return {
-      layout: this.props.layout||{"kind": "ergodox_ez","description": "Untitled","properties": {},"layers": [{"description": "Untitled","properties": {},"keys": []}]},
+      layout: this.props.layout || {
+        "kind": "ergodox_ez",
+        "description": "Untitled",
+        "properties": {},
+        "layers": [
+          {
+            "description": "Untitled",
+            "properties": {},
+            "keys": []
+          }
+        ]
+      },
       selectedLayer: 0,
       selectedKey: null,
     };
@@ -64,10 +75,10 @@ var App = React.createClass({
       <div>
         <button className="btn btn-primary" onClick={this.save}>Save</button>
         <button className="btn btn-default" onClick={this.addLayer}>Add layer</button>
-        <button className="btn btn-success" onClick={this.download}>Download (currently only downloads default configuration)</button>
+        <button className="btn btn-success" onClick={this.download}>Download</button>
         <LayerSelection layers={this.state.layout.layers} selectedLayer={selectedLayer} onSelectLayer={this.selectLayer}/>
         <Layer kind={this.state.layout.kind} keys={keys} selectedKey={selectedKey} onSelectKey={this.selectKey}/>
-        <div className="row">
+        <div className="row keyboard-form-panels">
           <div className="col-sm-4">
             <LayerPanel layer={this.state.layout.layers[selectedLayer]} selectedLayer={selectedLayer} onLayerInfoChange={this.layerInfoChange}/>
           </div>
@@ -136,8 +147,8 @@ var App = React.createClass({
     }
   },
   download: function() {
-    var jsn = jQuery.param({ layout: this.state.layout });
-    window.open("/keyboard_layouts/download?" + jsn);
+    this.save;
+    window.open(window.keyboard_layout_form_url + "/download")
   },
   load: function() {
     var self = this;
