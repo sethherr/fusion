@@ -1,6 +1,6 @@
 class KeyboardLayoutsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :find_layout, only: [:edit, :update]
+  before_action :find_layout, only: [:edit, :update, :download]
 
   def index
     redirect_to new_keyboard_layout_url
@@ -29,13 +29,11 @@ class KeyboardLayoutsController < ApplicationController
   end
 
   def download
-    reactor = KeyboardReactor::Output.new(keyboard_hash: raw_permitted_layout_params)
-    # For now reactor returns the default hex, to ensure we can correctly compile a hex
-    # Once the reactor is fixed, this will work.
-    reactor.keyboard_type = 'ergodox_ez' # Remove this line once reactor is working
+    keyboard_json = LayoutSerializer.new(@layout, root: false)
+    reactor = KeyboardReactor::Output.new(keyboard_json.to_json)
     send_data reactor.hex,
               disposition: 'attachment',
-              filename: "#{reactor.keyboard_type}.hex",
+              filename: "#{reactor.keyboard_kind}.hex",
               type: 'application/octet-stream'
   end
 

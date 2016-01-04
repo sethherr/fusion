@@ -1,3 +1,7 @@
+def ergodox_ez_hash
+  JSON.parse(File.read(Rails.root.join('spec/fixtures/ergodox_ez.json')))
+end
+
 FactoryGirl.define do
   factory :key do
   end
@@ -9,6 +13,12 @@ FactoryGirl.define do
 
   factory :layout do
     sequence(:name) { |n| "keyboard #{n}" }
+    factory :ergodox_ez_layout do
+      keyboard Keyboard.ergodox_ez
+      after(:create) do |layout|
+        layout.update!(Layout.remap_json(ergodox_ez_hash))
+      end
+    end
   end
 
   factory :keyboard do

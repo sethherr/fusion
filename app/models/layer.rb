@@ -5,4 +5,6 @@ class Layer < ActiveRecord::Base
 
   validates :description, presence: true
   validates :layout, presence: true
+
+  attr_writer :properties
 end

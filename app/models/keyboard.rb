@@ -6,8 +6,13 @@ class Keyboard < ActiveRecord::Base
   validates :key_count, numericality: true
 
   def self.ergodox_ez
-    ergo = friendly_find('ErgoDox EZ')
-    ergo.present? ? ergo : create(name: 'ErgoDox EZ', key_count: 76)
+    k = friendly_find('ErgoDox EZ')
+    k.present? ? k : create(name: 'ErgoDox EZ', key_count: 76)
+  end
+
+  def self.planck
+    k = friendly_find('Planck')
+    k.present? ? k : create(name: 'Planck', key_count: 84)
   end
 
   def to_param

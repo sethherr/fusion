@@ -107,7 +107,7 @@ GEM
       railties (>= 3.1.0)
       turbolinks
     json (1.8.3)
-    keyboard_reactor (0.0.3)
+    keyboard_reactor (0.0.6)
       liquid (~> 3.0, >= 3.0.6)
       multi_json (~> 1.11, >= 1.11.2)
     liquid (3.0.6)

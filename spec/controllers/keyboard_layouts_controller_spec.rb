@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe KeyboardLayoutsController, type: :controller do
+  include_context :keyboard_json_fixtures
   let(:subject) { FactoryGirl.create(:layout) }
 
   let(:valid_attributes) do
@@ -63,10 +64,9 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
   end
 
   describe 'download' do
-    it 'calls KeyboardReactor with with passed JSON' do
-      # expect_any_instance_of(KeyboardReactor::Output).to receive(:hex)
-      expect_any_instance_of(KeyboardReactor::Output).to receive(:default_hex) { 'ooggidy' }
-      get :download, valid_attributes
+    it 'successfully creates an ergodox_ez' do
+      layout = FactoryGirl.create(:ergodox_ez_layout)
+      get :download, id: layout.id
       expect(response.code).to eq('200')
     end
   end
@@ -98,6 +98,13 @@ RSpec.describe KeyboardLayoutsController, type: :controller do
       target_json['layout'].merge!('id' => layout.id)
 
       expect(result.with_indifferent_access).to eq(target_json)
+    end
+
+    it 'creates a given layout from all the valid keys' do
+      ergodox_ez_attrs = { layout: JSON.parse(ergodox_ez_json) }
+      post :create, ergodox_ez_attrs.as_json, format: :json
+      layout = Layout.last
+      expect(layout.keys.count).to be > 75
     end
   end
 

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Layout, type: :model do
   it { is_expected.to belong_to :keyboard }
   it { is_expected.to have_many :layers }
+  it { is_expected.to have_many :keys }
   it { is_expected.to validate_presence_of :name }
   it { is_expected.to accept_nested_attributes_for :layers }
 
@@ -33,6 +34,25 @@ describe Layout, type: :model do
         layout = FactoryGirl.create(:layout)
         layout.kind = 'ErgoDOX SWEEER MAKING A NEW THING HERE'
         expect(layout.keyboard).to be_nil
+      end
+    end
+  end
+  describe 'with keyboard json' do
+    include_context :keyboard_json_fixtures
+    describe 'remapped_json' do
+      it 'remaps ergodox_ez json' do
+        remapped = Layout.remap_json(JSON.parse(ergodox_ez_json))
+        expect(remapped['layers_attributes'].first['keys_attributes']).to be_present
+      end
+    end
+
+    describe 'ergodox_ez factory' do
+      # This is failing because the layer has 84 keys. Which is a problem with the
+      # JSON that is in reactor and here.
+      it 'creates a ergodox_ez with layers and keys as expected' do
+        layout = FactoryGirl.create(:ergodox_ez_layout)
+        expect(layout.layers.first.keys.count).to eq 76
+        expect(layout.kind).to eq(Keyboard.ergodox_ez)
       end
     end
   end
